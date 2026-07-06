@@ -2,58 +2,52 @@
 
 Plataforma modular enfocada en conectar personas, empresas y territorio, transformando oportunidades en proyectos reales.
 
+## Lema
+
+"La tecnología al servicio de las personas, las empresas y el territorio."
+
 ## Visión
 
 ReproOrigen XXI es una plataforma modular diseñada para conectar personas, empresas y territorio, transformando oportunidades en proyectos reales.
 
-## Arquitectura
+## Nuestra misión
 
-La arquitectura técnica está documentada en:
+Crear la mayor plataforma de agentes especializados para ayudar a empresas, administraciones y organizaciones a trabajar de forma más eficiente, ofreciendo un mejor servicio a los ciudadanos y liberando tiempo para las personas.
 
-[docs/architecture.md](docs/architecture.md)
+## Nuestra visión
 
-## Hoja de ruta
+Queremos que la inteligencia artificial ayude a crear organizaciones más eficientes, sostenibles y humanas.
 
-El estado del proyecto y las próximas fases se documentan en:
+## Nuestro propósito
 
-[docs/roadmap.md](docs/roadmap.md)
+No sustituir personas.
 
-## Tecnologías
+Ayudarlas.
 
-* Next.js
+No aumentar la presión.
+
+Reducirla.
+
+No complicar procesos.
+
+Simplificarlos.
+Dashboard
+
 * React
+
+Clientes
+
 * TypeScript
-* Tailwind CSS
-* Framer Motion
 
-## Estado del proyecto
 
-Primera arquitectura modular en desarrollo. A partir de este momento, la arquitectura base está congelada y el trabajo se centrará en construir funcionalidades y experiencia sobre esta base.
 
-## Fase 5 — Panel del instalador
+Profesionales
 
-Cada profesional tendrá acceso a un panel para:
+📁 IA STUDIO   ← NUEVO
 
-- aceptar trabajos
-- subir fotos
-- marcar la obra como terminada
-- emitir documentación
+Marketplace
 
-## Fase 6 — Panel Empresa
-
-Desde el panel de empresa se podrá supervisar:
-
-- obras abiertas
-- técnicos disponibles
-- presupuestos
-- incidencias
-- pagos pendientes
-- clientes
-
-## Espacio Climatización
-
-• Aire acondicionado
-
+Configuración
 • Aerotermia
 
 • Bombas de calor
@@ -126,6 +120,286 @@ REPROORIGEN XXI
 ├── Repoblación
 └── Medio ambiente
 ```
+
+## Estructura Ejecutiva y Operativa
+
+```text
+CEO
+                       │
+              Rebeca Pitarch
+                       │
+        ───────────────┼────────────────
+                       │
+          CENTRO DE OPERACIONES
+                       │
+ ┌──────────┬──────────┬──────────┬──────────┐
+ │          │          │          │
+ CRM      Obras     Agenda    IA Central
+ │          │          │          │
+ │          │          │          │
+ Hogar   Profesionales  Clientes  Automatización
+ │
+ ├── Ventanas
+ ├── Climatización
+ ├── Aerotermia
+ ├── Solar
+ └── Reformas
+```
+
+## REPROORIGEN XXI OS
+
+```text
+REPROORIGEN XXI OS
+
+         Plataforma de Agentes Especializados de Inteligencia Artificial
+
+                                        │
+                                        ▼
+
+                           REPROORIGEN XXI OS CORE
+
+                                        │
+────────────────────────────────────────┼────────────────────────────────────────
+
+                             DIRECTOR IA (ORQUESTADOR)
+
+                                        │
+
+────────────────────────────────────────┼────────────────────────────────────────
+
+ IA EMPRESAS      IA ADMINISTRACIÓN      IA HOGAR      IA TERRITORIO
+
+────────────────────────────────────────┼────────────────────────────────────────
+
+CRM
+Agenda
+Documentos
+Subvenciones
+Clientes
+Obras
+Automatización
+Comunicación
+Analítica
+
+────────────────────────────────────────┼────────────────────────────────────────
+
+              BIBLIOTECA DE AGENTES ESPECIALIZADOS
+
+• Comercial
+• Atención Ciudadana
+• Subvenciones
+• Turismo
+• Colegios
+• Hoteles
+• Inmobiliarias
+• Gestorías
+• Constructoras
+• Comunidades
+• Energía
+• Ventanas
+• Climatización
+• Agricultura
+• Industria
+• Medio Ambiente
+• Fundación
+• Universidad
+```
+
+## IA STUDIO
+
+```text
+IA STUDIO
+
+├── Director IA
+│
+├── Catálogo de Agentes
+│
+├── Clientes
+│
+├── Agentes Activos
+│
+├── Plantillas
+│
+├── Integraciones
+│
+├── Marketplace
+│
+└── Analítica
+```
+
+## REPROORIGEN XXI Marketplace
+
+```text
+REPROORIGEN XXI
+
+Marketplace
+
+│
+
+├── Agente Ayuntamiento
+├── Agente Colegio
+├── Agente Empresa
+├── Agente Turismo
+├── Agente Hotel
+├── Agente Clínica
+├── Agente Inmobiliaria
+├── Agente Gestoría
+├── Agente Comunidad de Propietarios
+└── Agente Comercio
+```
+
+## Flujo Marketplace: Ayuntamiento Burriana
+
+Marketplace
+
+Ayuntamiento Burriana
+
+↓
+
+Contrata
+
+✓ Atención Ciudadana
+
+✓ Agenda
+
+✓ Documentación
+
+↓
+
+Suscripción mensual
+
+## Flujo Marketplace: Empresa Ventanas
+
+Empresa Ventanas
+
+↓
+
+Contrata
+
+✓ Comercial
+
+✓ CRM
+
+✓ Presupuestos
+
+↓
+
+Suscripción mensual
+
+## REPROORIGEN XXI AI
+
+```text
+REPROORIGEN XXI AI
+
+EMPRESA
+├── Comercial
+├── CRM
+├── Presupuestos
+├── Atención al cliente
+
+ADMINISTRACIÓN
+├── Atención ciudadana
+├── Expedientes
+├── Agenda
+├── Documentos
+
+HOGAR
+├── Rehabilitación energética
+├── Ventanas
+├── Aerotermia
+├── Energía solar
+├── Subvenciones
+
+EDUCACIÓN
+├── Colegios
+├── Formación
+├── Comunicación con familias
+
+TURISMO
+├── Información turística
+├── Reservas
+├── Eventos
+├── Rutas
+
+SALUD
+├── Agenda
+├── Recordatorios
+├── Documentación
+
+INDUSTRIA
+├── Producción
+├── Calidad
+├── Medio ambiente
+├── Normativa
+```
+
+## Director IA
+
+```text
+DIRECTOR IA
+                       │
+───────────────────────┼────────────────────────
+```
+
+## Flujo Comercial de Agentes
+
+Agente Comercial
+
+↓
+
+Agente CRM
+
+↓
+
+Agente Marketing
+
+↓
+
+Agente Presupuestos
+
+↓
+
+Agente Cobros
+
+## Flujo de Atención Ciudadana
+
+Atención Ciudadana
+
+↓
+
+Agenda
+
+↓
+
+Documentos
+
+↓
+
+Subvenciones
+
+↓
+
+Expedientes
+
+## Flujo Hogar
+
+Ventanas
+
+↓
+
+Climatización
+
+↓
+
+Solar
+
+↓
+
+Aislamiento
+
+↓
+
+Ayudas
 
 ## Campos Base de Registro
 

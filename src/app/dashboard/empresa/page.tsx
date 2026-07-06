@@ -19,6 +19,7 @@ import AICentralStructure from '@/components/AICentralStructure';
 import ReproOrigenOSStructure from '@/components/ReproOrigenOSStructure';
 import ReproOrigenMainStructure from '@/components/ReproOrigenMainStructure';
 import AILeadFlow from '@/components/AILeadFlow';
+import IAStudioPanel from '@/components/IAStudioPanel';
 
 export default function EmpresaPage() {
   return (
@@ -51,6 +52,8 @@ export default function EmpresaPage() {
       <ClientDocumentStructure />
 
       <AICentralStructure />
+
+      <IAStudioPanel />
 
       <ReproOrigenOSStructure />
 

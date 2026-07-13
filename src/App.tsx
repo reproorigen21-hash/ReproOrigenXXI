@@ -2865,10 +2865,10 @@ function PublicPage() {
       return (
         <div className="public-home public-home--editorial">
 
-          {/* ESCENA 1 — El Despertar del Sello */}
+          {/* ESCENA 1 — Los pasadizos del origen */}
           <motion.section
             className="home-hero home-hero--cinematic home-hero--despertar"
-            aria-label="El Despertar del Sello — ReproOrigen XXI"
+            aria-label="Los pasadizos del origen — ReproOrigen XXI"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
@@ -2887,7 +2887,7 @@ function PublicPage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.7 }}
             >
-              El Arca del Origen · Una navegación hacia un nuevo siglo
+              ESCENA I · LOS PASADIZOS DEL ORIGEN
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
@@ -2902,7 +2902,7 @@ function PublicPage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 1.05 }}
             >
-              El visitante no entra en una página. Entra en una historia.
+              Corredores de piedra. Biblioteca subterránea. Una oscuridad cálida que guarda siglos de conocimiento.
             </motion.p>
             <motion.div
               className="home-hero__actions"
@@ -2919,18 +2919,18 @@ function PublicPage() {
             </motion.div>
           </motion.section>
 
-          {/* ESCENA 2 — El Mapa del Viaje */}
+          {/* ESCENA 2 — El mapa vivo */}
           <motion.section
             className="home-map home-map--cinematic home-map--territories"
-            aria-label="Mapa del Viaje — cinco territorios"
+            aria-label="El mapa vivo — cinco territorios"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.75 }}
           >
-            <p className="home-hero__eyebrow">ESCENA II · EL MAPA DEL VIAJE</p>
-            <h2>Los territorios del ecosistema</h2>
-            <p>Como un mapa de navegación antiguo: costas, bosques, montañas y rutas hacia cada puerta del universo ReproOrigen XXI.</p>
+            <p className="home-hero__eyebrow">ESCENA II · EL MAPA VIVO</p>
+            <h2>El mapa extendido sobre la mesa</h2>
+            <p>Rutas dibujadas a mano, brújula, símbolos y territorios que se iluminan al pasar. Cada zona es una puerta.</p>
             <div className="home-territories__grid">
               {arcaTerritorios.map((territorio, index) => (
                 <motion.button
@@ -2954,9 +2954,9 @@ function PublicPage() {
 
           {/* ESCENA 3 — El Arca */}
           <PhotoBanner
-            imageUrl="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80"
-            title="El Arca ReproOrigen XXI"
-            caption="Una biblioteca antigua que ha evolucionado al siglo XXI. Madera, tecnología, mapas, cristal y luz."
+            imageUrl="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1800&q=80"
+            title="El Arca — Biblioteca Secreta del Origen"
+            caption="Un archivo vivo: biblioteca subterránea, bosque antiguo, cartografía y arquitectura mediterránea fundidos."
           />
 
           <motion.section
@@ -2969,7 +2969,7 @@ function PublicPage() {
           >
             <p className="public-kicker">ESCENA III · EL ARCA</p>
             <h2>Dentro del Arca</h2>
-            <p className="home-arca__intro">No es una nave futurista fría. Es una mezcla de madera, tecnología, mapas, cristal y luz. Como si una biblioteca antigua hubiera evolucionado al siglo XXI.</p>
+            <p className="home-arca__intro">Un archivo vivo. Una biblioteca que guarda conocimiento, métodos, agentes IA, proyectos e historias humanas. Biblioteca secreta, bosque antiguo, cartografía de exploradores, arquitectura mediterránea y tecnología invisible.</p>
             <div className="home-arca__contents">
               {arcaContents.map((item, index) => (
                 <motion.div

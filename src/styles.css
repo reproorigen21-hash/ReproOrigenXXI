@@ -4642,7 +4642,7 @@ button {
       #e4d5b8 56%,
       #d8c9a8 100%
     );
-  border-color: rgba(120, 80, 30, 0.32) !important;
+  border-color: rgba(120, 80, 30, 0.32);
   box-shadow:
     /* Map hanging shadow on dark table */
     0 24px 52px rgba(60, 35, 10, 0.28),
@@ -4826,7 +4826,7 @@ button {
 }
 
 .home-arca .public-kicker {
-  color: rgba(200, 154, 60, 0.88) !important;
+  color: rgba(200, 154, 60, 0.88);
 }
 
 .home-arca h2 {

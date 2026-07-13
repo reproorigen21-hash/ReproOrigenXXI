@@ -3548,6 +3548,71 @@ button {
   }
 }
 
+/* Hotfix Vercel: evita regresion a fondo oscuro en bloques legacy */
+.os-shell__header,
+.module-hub__sidebar,
+.module-hub__content,
+.module-hub__ecosystem,
+.explore-system__canvas,
+.explore-system__space,
+.module-hub__ecosystem-core,
+.module-hub__ecosystem-node,
+.editorial-metric-card,
+.repro-main-structure,
+.repro-main-structure__section,
+.space-content .space-section,
+.space-content .editorial-block,
+.space-content .premium-card,
+.space-content .transformation-case,
+.space-content .impact-section__card,
+.space-content .methodology-timeline__item,
+.space-content .workflow-node__body,
+.space-content .cta-section,
+.space-content .section-hero {
+  background: #F8F4EC !important;
+  color: #2A2A24 !important;
+  border-color: rgba(35, 67, 52, 0.18) !important;
+  box-shadow: 0 20px 60px rgba(35, 67, 52, 0.12) !important;
+}
+
+.space-content,
+.space-content--empresas,
+.space-content--hogar,
+.space-content--territorio,
+.space-content--formacion,
+.space-content--comunidad,
+.space-content--experiencias {
+  --space-panel-bg: #F8F4EC;
+  --space-card-bg: #F8F4EC;
+  --space-title: #234334;
+  --space-text: #2A2A24;
+  --space-muted: #2A2A24;
+  --space-panel-border: rgba(35, 67, 52, 0.18);
+  --space-card-border: rgba(35, 67, 52, 0.16);
+}
+
+.space-content .section-title h3,
+.space-content .premium-card strong,
+.space-content .transformation-case strong,
+.space-content .methodology-timeline__item p,
+.space-content .impact-section__card strong,
+.space-content .workflow-node__body strong,
+.space-content .cta-section h3,
+.explore-system__header h2 {
+  color: #234334 !important;
+}
+
+.space-content .section-title p,
+.space-content .methodology-timeline__item span,
+.space-content .impact-section__card p,
+.space-content .editorial-block p,
+.space-content .transformation-case p,
+.space-content .cta-section p,
+.space-content .quote-block cite,
+.explore-system__header p {
+  color: #2A2A24 !important;
+}
+
 .public-home--editorial {
   display: grid;
   gap: 2rem;

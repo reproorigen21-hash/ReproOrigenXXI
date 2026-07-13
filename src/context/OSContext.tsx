@@ -8,8 +8,9 @@ type OSContextValue = {
 };
 
 const initialState: OSState = {
-  screen: 'intro',
+  screen: 'platform',
   activeModule: null,
+  publicRoute: 'inicio',
   userType: '',
   interest: '',
   origin: 'direct'

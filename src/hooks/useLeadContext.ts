@@ -5,6 +5,7 @@ export function useLeadContext() {
 
   const hiddenContext = {
     activeModule: state.activeModule ?? 'none',
+    publicRoute: state.publicRoute,
     userType: state.userType || 'unknown',
     interest: state.interest || 'none',
     origin: state.origin || 'platform'

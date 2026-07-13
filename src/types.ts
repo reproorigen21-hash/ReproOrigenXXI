@@ -4,6 +4,47 @@ export type ScreenKey = 'intro' | 'activate' | 'platform';
 export type OSState = {
   screen: ScreenKey;
   activeModule: ModuleKey | null;
+  publicRoute:
+    | 'inicio'
+    | 'empresas'
+    | 'hogar'
+    | 'territorio'
+    | 'formacion'
+    | 'comunidad'
+    | 'experiencias'
+    | 'soluciones'
+    | 'sectores'
+    | 'automatizacion-inteligente'
+    | 'escuela-editorial'
+    | 'editorial-reproorigen'
+    | 'la-llegada-de-la-promesa'
+    | 'campus-reproorigen'
+    | 'catalogo-agentes-ia'
+    | 'jerarquia-reproorigen'
+    | 'comunidad-reproorigen'
+    | 'quienes-somos'
+    | 'nuestro-metodo'
+    | 'colabora-con-nosotros'
+    | 'como-trabajamos'
+    | 'nuestra-comunidad'
+    | 'casos-transformacion'
+    | 'alianzas'
+    | 'preguntas-frecuentes'
+    | 'biblioteca-viva'
+    | 'albatour'
+    | 'mapa-conocimiento'
+    | 'portal-cliente'
+    | 'centro-configuracion'
+    | 'solicitar-diagnostico'
+    | 'reservar-reunion'
+    | 'que-obtendra'
+    | 'impacto'
+    | 'centro-direccion'
+    | 'fundacion'
+    | 'contacto'
+    | 'aviso-legal'
+    | 'privacidad'
+    | 'cookies';
   userType: string;
   interest: string;
   origin: string;

@@ -2788,7 +2788,7 @@ function PublicPage() {
         { label: 'Empresas', route: 'soluciones', className: 'home-map__node--empresas' },
         { label: 'Territorio', route: 'sectores', className: 'home-map__node--territorio' },
         { label: 'Experiencias', route: 'albatour', className: 'home-map__node--experiencias' },
-        { label: 'Comunidad', route: 'comunidad-reproorigen', className: 'home-map__node--comunidad' },
+        { label: 'IA', route: 'catalogo-agentes-ia', className: 'home-map__node--ia' },
         { label: 'Campus', route: 'campus-reproorigen', className: 'home-map__node--campus' }
       ];
 
@@ -2812,9 +2812,9 @@ function PublicPage() {
             >
               <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI con identidad editorial" loading="eager" decoding="async" />
             </motion.div>
-            <p className="home-hero__eyebrow">Biblioteca Viva · Editorial de alta gama</p>
-            <h1>Cuando todo se detiene, el futuro encuentra un nuevo origen.</h1>
-            <p className="home-hero__lead">Naturaleza, personas, empresas e identidad en una experiencia editorial cinematográfica.</p>
+            <p className="home-hero__eyebrow">Biblioteca Viva · Apertura del relato</p>
+            <h1>El sello abre el libro y comienza la travesía.</h1>
+            <p className="home-hero__lead">Una firma de cera activa el primer capítulo: pergamino, luz cálida y un territorio vivo por descubrir.</p>
             <div className="home-hero__actions">
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
                 Entrar al ecosistema
@@ -2833,8 +2833,8 @@ function PublicPage() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7 }}
           >
-            <h2>Explorar el territorio vivo</h2>
-            <p>Un mapa editorial para navegar por empresas, comunidad, territorio y formación.</p>
+            <h2>Mapa de puertas narrativas</h2>
+            <p>Cinco puertas abren el universo ReproOrigen XXI: Territorio, Empresas, Experiencias, Campus e IA.</p>
             <div className="home-map__grid">
               {cinematicNodes.map((node, index) => (
                 <motion.button
@@ -2859,8 +2859,14 @@ function PublicPage() {
             caption="Cada capítulo conecta empresa, naturaleza y comunidad con una narrativa de futuro."
           />
 
-          <section className="public-panel public-panel--stack home-chapter">
-            <p className="public-kicker">CAPÍTULO I</p>
+          <motion.section
+            className="public-panel public-panel--stack home-chapter"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.22 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="public-kicker">CAPÍTULO I · APERTURA</p>
             <h2>Principios de conocimiento institucional</h2>
             <div className="public-grid public-grid--cases home-grid-reduced">
               {displayedKnowledgePillars.map((pillar, index) => (
@@ -2877,7 +2883,7 @@ function PublicPage() {
                 </motion.article>
               ))}
             </div>
-          </section>
+          </motion.section>
 
           <PhotoBanner
             imageUrl="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80"
@@ -2885,8 +2891,14 @@ function PublicPage() {
             caption="ReproOrigen XXI transforma complejidad en decisiones claras, visuales y accionables."
           />
 
-          <section className="public-panel public-panel--stack home-chapter">
-            <p className="public-kicker">CAPÍTULO II</p>
+          <motion.section
+            className="public-panel public-panel--stack home-chapter"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.22 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="public-kicker">CAPÍTULO II · TRAVESÍA</p>
             <h2>Ecosistema oficial ReproOrigen XXI</h2>
             <div className="public-grid public-grid--cases home-grid-reduced">
               {displayedEcosystemPillars.map((pillar, index) => (
@@ -2906,13 +2918,19 @@ function PublicPage() {
                 </motion.article>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="public-panel home-chapter">
-            <p className="public-kicker">CAPÍTULO III</p>
+          <motion.section
+            className="public-panel home-chapter"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="public-kicker">CAPÍTULO III · ACTIVACIÓN</p>
             <h2>Activación de Arquitectos IA</h2>
             <p>Activamos arquitectos IA especializados por área para que cada organización pueda operar con más capacidad, criterio y continuidad editorial.</p>
-          </section>
+          </motion.section>
 
           <FinalCta onNavigate={navigate} />
         </div>

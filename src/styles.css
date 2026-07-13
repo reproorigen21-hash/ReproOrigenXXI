@@ -4132,8 +4132,8 @@ button {
 /* Cinematic editorial home and institutional navigation */
 .public-header {
   gap: 1.2rem;
-  border-bottom: 1px solid rgba(200, 154, 60, 0.5);
-  background: rgba(248, 244, 236, 0.88);
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-amber) 50%, transparent);
+  background: color-mix(in srgb, var(--brand-bg-base) 88%, transparent);
 }
 
 .public-header__brand {
@@ -4170,11 +4170,11 @@ button {
   width: 52px;
   height: 52px;
   border-radius: 999px;
-  border: 1px solid rgba(200, 154, 60, 0.54);
+  border: 1px solid color-mix(in srgb, var(--brand-amber) 54%, transparent);
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(circle at 35% 30%, rgba(200, 154, 60, 0.2), rgba(35, 67, 52, 0.9) 72%);
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--brand-amber) 20%, transparent), color-mix(in srgb, var(--brand-primary) 90%, transparent) 72%);
 }
 
 .public-header__seal img {

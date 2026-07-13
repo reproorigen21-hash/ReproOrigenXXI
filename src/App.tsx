@@ -2810,7 +2810,7 @@ function PublicPage() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             >
-              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial ReproOrigen XXI" loading="eager" decoding="async" />
+              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial ReproOrigen XXI" loading="eager" decoding="async" fetchPriority="high" />
             </motion.div>
             <p className="home-hero__eyebrow">Biblioteca Viva · Editorial de alta gama</p>
             <h1>Cuando todo se detiene, el futuro encuentra un nuevo origen.</h1>
@@ -4427,7 +4427,7 @@ function PublicPage() {
       <header className="public-header">
         <button type="button" className="public-header__brand" onClick={() => navigate('inicio')}>
           <span className="public-header__seal" aria-hidden>
-            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" aria-hidden="true" role="presentation" />
+            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" aria-hidden="true" />
           </span>
           <span className="public-header__brand-copy">
             <strong>{publicConfig.companyName}</strong>

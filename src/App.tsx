@@ -2784,152 +2784,248 @@ function PublicPage() {
     }
 
     if (currentRoute === 'inicio') {
-      const cinematicNodes: Array<{ label: string; route: PublicRoute; className: string }> = [
-        { label: 'Empresas', route: 'soluciones', className: 'home-map__node--empresas' },
-        { label: 'Territorio', route: 'sectores', className: 'home-map__node--territorio' },
-        { label: 'Experiencias', route: 'albatour', className: 'home-map__node--experiencias' },
-        { label: 'IA', route: 'catalogo-agentes-ia', className: 'home-map__node--ia' },
-        { label: 'Campus', route: 'campus-reproorigen', className: 'home-map__node--campus' }
+      const arcaTerritorios: Array<{ emoji: string; nombre: string; subtitulo: string; descripcion: string; route: PublicRoute; className: string }> = [
+        {
+          emoji: '🌲',
+          nombre: 'Bosque del Territorio',
+          subtitulo: 'Naturaleza · Revitalización',
+          descripcion: 'Ayuntamientos, naturaleza y proyectos de revitalización territorial.',
+          route: 'sectores',
+          className: 'home-map__node--territorio'
+        },
+        {
+          emoji: '🏛️',
+          nombre: 'Ciudad de las Empresas',
+          subtitulo: 'IA · Estrategia · Automatización',
+          descripcion: 'Inteligencia artificial, estrategia empresarial y automatización aplicada.',
+          route: 'soluciones',
+          className: 'home-map__node--empresas'
+        },
+        {
+          emoji: '⚒️',
+          nombre: 'Forja del Hogar',
+          subtitulo: 'Energía · Ventanas · Rehabilitación',
+          descripcion: 'Rehabilitación energética, ventanas y eficiencia para el hogar y la comunidad.',
+          route: 'automatizacion-inteligente',
+          className: 'home-map__node--ia'
+        },
+        {
+          emoji: '📚',
+          nombre: 'Biblioteca Viva',
+          subtitulo: 'Campus · Conocimiento · Metodología',
+          descripcion: 'Campus, obras vivas y metodología para construir conocimiento con legado.',
+          route: 'biblioteca-viva',
+          className: 'home-map__node--campus'
+        },
+        {
+          emoji: '🌍',
+          nombre: 'Rutas del Origen',
+          subtitulo: 'Experiencias · Viajes',
+          descripcion: 'Experiencias con propósito, viajes educativos y rutas del territorio.',
+          route: 'albatour',
+          className: 'home-map__node--experiencias'
+        }
       ];
 
-      const displayedKnowledgePillars = institutionalKnowledgePillars.slice(0, 4);
-      const displayedEcosystemPillars = ecosystemPillars.slice(0, 5);
+      const arcaContents = [
+        { icon: '🤖', label: 'Agentes IA', description: 'Arquitectos especializados por dominio.' },
+        { icon: '📐', label: 'Métodos', description: 'Procesos replicables y conocimiento vivo.' },
+        { icon: '🗺️', label: 'Proyectos', description: 'Ejecución con hitos y trazabilidad.' },
+        { icon: '🤝', label: 'Personas', description: 'Comunidad de guardianes y colaboradores.' },
+        { icon: '🌿', label: 'Territorios', description: 'Municipios, empresas y ecosistemas.' }
+      ];
+
+      const chapters = [
+        {
+          number: 'CAPÍTULO I',
+          title: 'El origen',
+          description: 'Conocimiento aplicado, método replicable y acompañamiento real. El origen de un ecosistema vivo que mejora con cada proyecto.',
+          action: null
+        },
+        {
+          number: 'CAPÍTULO II',
+          title: 'La transformación',
+          description: 'Empresas, territorios y personas que evolucionan. Estrategia, automatización e impacto medible en cada ruta de cambio.',
+          action: { label: 'Ver ecosistema', route: 'soluciones' as PublicRoute }
+        },
+        {
+          number: 'CAPÍTULO III',
+          title: 'Los guardianes del conocimiento',
+          description: 'Director, Consejo de Guardianes y Arquitectos IA. Una jerarquía viva que custodia el rumbo, la memoria y la ejecución del sistema.',
+          action: { label: 'Conocer la jerarquía', route: 'jerarquia-reproorigen' as PublicRoute }
+        },
+        {
+          number: 'CAPÍTULO IV',
+          title: 'Los territorios del futuro',
+          description: 'Bosques, ciudades, forjas, bibliotecas y rutas. Cinco puertas abiertas hacia un universo de legado, aventura y descubrimiento.',
+          action: { label: 'Explorar territorios', route: 'mapa-conocimiento' as PublicRoute }
+        }
+      ];
 
       return (
         <div className="public-home public-home--editorial">
+
+          {/* ESCENA 1 — El Despertar del Sello */}
           <motion.section
-            className="home-hero home-hero--cinematic"
-            aria-label="Hero ReproOrigen XXI"
+            className="home-hero home-hero--cinematic home-hero--despertar"
+            aria-label="El Despertar del Sello — ReproOrigen XXI"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.div
               className="home-seal"
-              initial={{ scale: 0.86, opacity: 0 }}
+              initial={{ scale: 0.82, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
             >
-              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI con identidad editorial" loading="eager" decoding="async" />
+              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI — emblema del viaje" loading="eager" decoding="async" />
             </motion.div>
-            <p className="home-hero__eyebrow">Biblioteca Viva · Apertura del relato</p>
-            <h1>El sello abre el libro y comienza la travesía.</h1>
-            <p className="home-hero__lead">Una firma de cera activa el primer capítulo: pergamino, luz cálida y un territorio vivo por descubrir.</p>
-            <div className="home-hero__actions">
+            <motion.p
+              className="home-hero__eyebrow"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.7 }}
+            >
+              El Arca del Origen · Una navegación hacia un nuevo siglo
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
+            >
+              El origen de una nueva era.
+            </motion.h1>
+            <motion.p
+              className="home-hero__lead"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 1.05 }}
+            >
+              El visitante no entra en una página. Entra en una historia.
+            </motion.p>
+            <motion.div
+              className="home-hero__actions"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.25 }}
+            >
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
-                Entrar al ecosistema
+                Iniciar el viaje
               </button>
               <button type="button" className="public-button public-button--secondary" onClick={() => navigate('mapa-conocimiento')}>
-                Ver mapa institucional
+                Ver el mapa
               </button>
-            </div>
+            </motion.div>
           </motion.section>
 
+          {/* ESCENA 2 — El Mapa del Viaje */}
           <motion.section
-            className="home-map home-map--cinematic"
-            aria-label="Explorar ecosistema"
+            className="home-map home-map--cinematic home-map--territories"
+            aria-label="Mapa del Viaje — cinco territorios"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
           >
-            <h2>Mapa de puertas narrativas</h2>
-            <p>Cinco puertas abren el universo ReproOrigen XXI: Territorio, Empresas, Experiencias, Campus e IA.</p>
-            <div className="home-map__grid">
-              {cinematicNodes.map((node, index) => (
+            <p className="home-hero__eyebrow">ESCENA II · EL MAPA DEL VIAJE</p>
+            <h2>Los territorios del ecosistema</h2>
+            <p>Como un mapa de navegación antiguo: costas, bosques, montañas y rutas hacia cada puerta del universo ReproOrigen XXI.</p>
+            <div className="home-territories__grid">
+              {arcaTerritorios.map((territorio, index) => (
                 <motion.button
-                  key={node.label}
+                  key={territorio.nombre}
                   type="button"
-                  className={`home-map__node ${node.className}`}
-                  onClick={() => navigate(node.route)}
-                  initial={{ opacity: 0, y: 14 }}
+                  className={`home-territory__card ${territorio.className}`}
+                  onClick={() => navigate(territorio.route)}
+                  initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {node.label}
+                  <span className="home-territory__emoji" aria-hidden="true">{territorio.emoji}</span>
+                  <span className="home-territory__name">{territorio.nombre}</span>
+                  <span className="home-territory__subtitle">{territorio.subtitulo}</span>
+                  <span className="home-territory__desc">{territorio.descripcion}</span>
                 </motion.button>
               ))}
             </div>
           </motion.section>
 
+          {/* ESCENA 3 — El Arca */}
           <PhotoBanner
             imageUrl="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80"
-            title="Territorio mediterráneo, identidad editorial"
-            caption="Cada capítulo conecta empresa, naturaleza y comunidad con una narrativa de futuro."
+            title="El Arca ReproOrigen XXI"
+            caption="Una biblioteca antigua que ha evolucionado al siglo XXI. Madera, tecnología, mapas, cristal y luz."
           />
 
           <motion.section
-            className="public-panel public-panel--stack home-chapter"
+            className="public-panel public-panel--stack home-chapter home-arca"
+            aria-label="El Arca — interior del ecosistema"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.22 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="public-kicker">CAPÍTULO I · APERTURA</p>
-            <h2>Principios de conocimiento institucional</h2>
-            <div className="public-grid public-grid--cases home-grid-reduced">
-              {displayedKnowledgePillars.map((pillar, index) => (
-                <motion.article
-                  key={pillar.title}
-                  className="public-card"
-                  initial={{ opacity: 0, y: 16 }}
+            <p className="public-kicker">ESCENA III · EL ARCA</p>
+            <h2>Dentro del Arca</h2>
+            <p className="home-arca__intro">No es una nave futurista fría. Es una mezcla de madera, tecnología, mapas, cristal y luz. Como si una biblioteca antigua hubiera evolucionado al siglo XXI.</p>
+            <div className="home-arca__contents">
+              {arcaContents.map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  className="home-arca__item"
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.45, delay: index * 0.09 }}
                 >
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.description}</p>
-                </motion.article>
+                  <span className="home-arca__icon" aria-hidden="true">{item.icon}</span>
+                  <strong className="home-arca__label">{item.label}</strong>
+                  <span className="home-arca__desc">{item.description}</span>
+                </motion.div>
               ))}
             </div>
           </motion.section>
 
+          {/* ESCENA 4 — Los Capítulos */}
           <PhotoBanner
             imageUrl="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80"
-            title="Personas y empresas en movimiento"
-            caption="ReproOrigen XXI transforma complejidad en decisiones claras, visuales y accionables."
+            title="Una saga de descubrimiento, exploración y legado"
+            caption="ReproOrigen XXI no es una web que explica servicios. Es un universo que invita a ser explorado."
           />
 
           <motion.section
             className="public-panel public-panel--stack home-chapter"
+            aria-label="Los Capítulos"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.22 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="public-kicker">CAPÍTULO II · TRAVESÍA</p>
-            <h2>Ecosistema oficial ReproOrigen XXI</h2>
-            <div className="public-grid public-grid--cases home-grid-reduced">
-              {displayedEcosystemPillars.map((pillar, index) => (
+            <p className="public-kicker">ESCENA IV · LOS CAPÍTULOS</p>
+            <h2>La historia en cuatro capítulos</h2>
+            <div className="public-grid public-grid--cases home-grid-reduced home-chapters__grid">
+              {chapters.map((chapter, index) => (
                 <motion.article
-                  key={pillar.name}
-                  className={`public-card ${pillar.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}
+                  key={chapter.number}
+                  className="public-card home-chapter__card"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.45, delay: index * 0.07 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, delay: index * 0.09 }}
                 >
-                  <h3>{pillar.name}</h3>
-                  <p>{pillar.description}</p>
-                  <button type="button" className="public-button" onClick={() => navigate(pillar.route)}>
-                    Ir a {routeLabels[pillar.route]}
-                  </button>
+                  <p className="home-chapter__number">{chapter.number}</p>
+                  <h3>{chapter.title}</h3>
+                  <p>{chapter.description}</p>
+                  {chapter.action && (
+                    <button type="button" className="public-button" onClick={() => navigate(chapter.action!.route)}>
+                      {chapter.action.label}
+                    </button>
+                  )}
                 </motion.article>
               ))}
             </div>
-          </motion.section>
-
-          <motion.section
-            className="public-panel home-chapter"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="public-kicker">CAPÍTULO III · ACTIVACIÓN</p>
-            <h2>Activación de Arquitectos IA</h2>
-            <p>Activamos arquitectos IA especializados por área para que cada organización pueda operar con más capacidad, criterio y continuidad editorial.</p>
           </motion.section>
 
           <FinalCta onNavigate={navigate} />

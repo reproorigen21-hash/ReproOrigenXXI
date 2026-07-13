@@ -4295,7 +4295,7 @@ button {
 .home-hero__lead {
   max-width: 46ch;
   font-size: clamp(1.06rem, 2vw, 1.45rem);
-  color: #2e2a23;
+  color: var(--brand-text);
 }
 
 .home-map--cinematic {

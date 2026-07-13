@@ -2792,8 +2792,8 @@ function PublicPage() {
         { label: 'Campus', route: 'campus-reproorigen', className: 'home-map__node--campus' }
       ];
 
-      const chapterKnowledge = institutionalKnowledgePillars.slice(0, 4);
-      const chapterEcosystem = ecosystemPillars.slice(0, 5);
+      const displayedKnowledgePillars = institutionalKnowledgePillars.slice(0, 4);
+      const displayedEcosystemPillars = ecosystemPillars.slice(0, 5);
 
       return (
         <div className="public-home public-home--editorial">
@@ -2863,7 +2863,7 @@ function PublicPage() {
             <p className="public-kicker">CAPÍTULO I</p>
             <h2>Principios de conocimiento institucional</h2>
             <div className="public-grid public-grid--cases home-grid-reduced">
-              {chapterKnowledge.map((pillar, index) => (
+              {displayedKnowledgePillars.map((pillar, index) => (
                 <motion.article
                   key={pillar.title}
                   className="public-card"
@@ -2889,7 +2889,7 @@ function PublicPage() {
             <p className="public-kicker">CAPÍTULO II</p>
             <h2>Ecosistema oficial ReproOrigen XXI</h2>
             <div className="public-grid public-grid--cases home-grid-reduced">
-              {chapterEcosystem.map((pillar, index) => (
+              {displayedEcosystemPillars.map((pillar, index) => (
                 <motion.article
                   key={pillar.name}
                   className={`public-card ${pillar.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}
@@ -4427,7 +4427,7 @@ function PublicPage() {
       <header className="public-header">
         <button type="button" className="public-header__brand" onClick={() => navigate('inicio')}>
           <span className="public-header__seal" aria-hidden>
-            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" />
+            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" aria-hidden="true" role="presentation" />
           </span>
           <span className="public-header__brand-copy">
             <strong>{publicConfig.companyName}</strong>

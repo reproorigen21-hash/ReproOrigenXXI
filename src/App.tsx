@@ -1,8 +1,10 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { OSProvider, useOS } from './context/OSContext';
 import { publicConfig } from './config/publicConfig';
 import { mision004Service } from './mision004/services';
 import type { Factura } from './mision004/types';
+import { PhotoBanner } from './components/PhotoBanner';
 
 const publicRoutes = [
   'inicio',
@@ -1741,29 +1743,39 @@ function isPublicRoute(route: string | null): route is PublicRoute {
 }
 
 function PublicTopNav({ currentRoute, isOpen, onNavigate }: { currentRoute: PublicRoute; isOpen: boolean; onNavigate: (route: PublicRoute) => void }) {
-  const menuRoutes: PublicRoute[] = [
-    'inicio',
-    'mapa-conocimiento',
-    'biblioteca-viva',
+  const primaryRoutes: PublicRoute[] = ['inicio', 'soluciones', 'mapa-conocimiento', 'biblioteca-viva', 'editorial-reproorigen', 'contacto'];
+  const ecosystemRoutes: PublicRoute[] = [
     'escuela-editorial',
-    'editorial-reproorigen',
     'la-llegada-de-la-promesa',
     'albatour',
     'campus-reproorigen',
     'catalogo-agentes-ia',
     'jerarquia-reproorigen',
     'comunidad-reproorigen',
-    'fundacion',
-    'contacto'
+    'fundacion'
   ];
+
+  const activeEcosystem = ecosystemRoutes.includes(currentRoute);
 
   return (
     <nav className={`public-nav ${isOpen ? 'is-open' : ''}`}>
-      {menuRoutes.map((route) => (
-        <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
-          {routeLabels[route]}
-        </button>
-      ))}
+      <div className="public-nav__primary">
+        {primaryRoutes.map((route) => (
+          <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
+            {routeLabels[route]}
+          </button>
+        ))}
+      </div>
+      <details className={`public-nav__ecosystem ${activeEcosystem ? 'is-active' : ''}`}>
+        <summary>Ecosistema</summary>
+        <div className="public-nav__dropdown">
+          {ecosystemRoutes.map((route) => (
+            <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
+              {routeLabels[route]}
+            </button>
+          ))}
+        </div>
+      </details>
     </nav>
   );
 }
@@ -2772,237 +2784,134 @@ function PublicPage() {
     }
 
     if (currentRoute === 'inicio') {
+      const cinematicNodes: Array<{ label: string; route: PublicRoute; className: string }> = [
+        { label: 'Empresas', route: 'soluciones', className: 'home-map__node--empresas' },
+        { label: 'Territorio', route: 'sectores', className: 'home-map__node--territorio' },
+        { label: 'Experiencias', route: 'albatour', className: 'home-map__node--experiencias' },
+        { label: 'Comunidad', route: 'comunidad-reproorigen', className: 'home-map__node--comunidad' },
+        { label: 'Campus', route: 'campus-reproorigen', className: 'home-map__node--campus' }
+      ];
+
+      const chapterKnowledge = institutionalKnowledgePillars.slice(0, 4);
+      const chapterEcosystem = ecosystemPillars.slice(0, 5);
+
       return (
         <div className="public-home public-home--editorial">
-          <section className="home-hero" aria-label="Hero ReproOrigen XXI">
-            <div className="home-seal" aria-hidden>
-              <span className="home-seal__mark">SELLO</span>
-            </div>
-            <p className="home-hero__lead">Cuando todo se detiene, el futuro encuentra un nuevo origen.</p>
-            <h1>ReproOrigen XXI</h1>
+          <motion.section
+            className="home-hero home-hero--cinematic"
+            aria-label="Hero ReproOrigen XXI"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              className="home-seal"
+              initial={{ scale: 0.86, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
+              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial ReproOrigen XXI" loading="eager" decoding="async" />
+            </motion.div>
+            <p className="home-hero__eyebrow">Biblioteca Viva · Editorial de alta gama</p>
+            <h1>Cuando todo se detiene, el futuro encuentra un nuevo origen.</h1>
+            <p className="home-hero__lead">Naturaleza, personas, empresas e identidad en una experiencia editorial cinematográfica.</p>
             <div className="home-hero__actions">
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
                 Entrar al ecosistema
               </button>
+              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('mapa-conocimiento')}>
+                Ver mapa institucional
+              </button>
             </div>
-          </section>
+          </motion.section>
 
-          <section className="home-map" aria-label="Explorar ecosistema">
-            <h2>Explorar</h2>
+          <motion.section
+            className="home-map home-map--cinematic"
+            aria-label="Explorar ecosistema"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2>Explorar el territorio vivo</h2>
+            <p>Un mapa editorial para navegar por empresas, comunidad, territorio y formación.</p>
             <div className="home-map__grid">
-              <button type="button" className="home-map__node home-map__node--empresas" onClick={() => navigate('soluciones')}>
-                Empresas
-              </button>
-              <button type="button" className="home-map__node home-map__node--territorio" onClick={() => navigate('sectores')}>
-                Territorio
-              </button>
-              <button type="button" className="home-map__node home-map__node--experiencias" onClick={() => navigate('albatour')}>
-                Experiencias
-              </button>
-              <button type="button" className="home-map__node home-map__node--comunidad" onClick={() => navigate('comunidad-reproorigen')}>
-                Comunidad
-              </button>
-              <button type="button" className="home-map__node home-map__node--campus" onClick={() => navigate('campus-reproorigen')}>
-                Campus
-              </button>
+              {cinematicNodes.map((node, index) => (
+                <motion.button
+                  key={node.label}
+                  type="button"
+                  className={`home-map__node ${node.className}`}
+                  onClick={() => navigate(node.route)}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                >
+                  {node.label}
+                </motion.button>
+              ))}
             </div>
-          </section>
+          </motion.section>
 
-          <div className="home-seal home-seal--closing" aria-hidden>
-            <span className="home-seal__mark">Biblioteca Viva Digital</span>
-          </div>
+          <PhotoBanner
+            imageUrl="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80"
+            title="Territorio mediterráneo, identidad editorial"
+            caption="Cada capítulo conecta empresa, naturaleza y comunidad con una narrativa de futuro."
+          />
 
-          <section className="public-panel">
-            <h2>Qué es ReproOrigen XXI</h2>
-            <p>ReproOrigen XXI es una plataforma de transformación empresarial y territorial que integra tecnología, equipos y metodología para convertir retos complejos en hojas de ruta ejecutables.</p>
-            <p>La diferencia entre una web bonita y una institución está en la calidad del conocimiento que comparte: aquí cada sección está pensada para orientar decisiones reales.</p>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Principios de Conocimiento Institucional</h2>
-            <div className="public-grid public-grid--cases">
-              {institutionalKnowledgePillars.map((pillar) => (
-                <article key={pillar.title} className="public-card">
+          <section className="public-panel public-panel--stack home-chapter">
+            <p className="public-kicker">CAPÍTULO I</p>
+            <h2>Principios de conocimiento institucional</h2>
+            <div className="public-grid public-grid--cases home-grid-reduced">
+              {chapterKnowledge.map((pillar, index) => (
+                <motion.article
+                  key={pillar.title}
+                  className="public-card"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                >
                   <h3>{pillar.title}</h3>
                   <p>{pillar.description}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </section>
 
-          <section className="public-panel public-panel--stack">
-            <h2>Arquitectura del ecosistema</h2>
-            <div className="public-grid public-grid--cases">
-              <article className="public-card public-card--highlight">
-                <h3>Mapa del Conocimiento</h3>
-                <p>Estructura de áreas por competencia demostrable y evolución orgánica del ecosistema.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('mapa-conocimiento')}>
-                  Ver mapa
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Biblioteca Viva</h3>
-                <p>Estructura de colecciones para narrativa, familias, colegios y Campus.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('biblioteca-viva')}>
-                  Ver arquitectura
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Editorial ReproOrigen XXI</h3>
-                <p>Catálogo editorial organizado por colecciones estratégicas.</p>
-                <button type="button" className="public-button public-button--secondary" onClick={() => navigate('editorial-reproorigen')}>
-                  Ver catálogo
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Campus ReproOrigen XXI</h3>
-                <p>Arquitectura de escuelas sin cursos, enfocada en orden institucional.</p>
-                <button type="button" className="public-button" onClick={() => navigate('campus-reproorigen')}>
-                  Ver escuelas
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Catalogo de Arquitectos IA</h3>
-                <p>Mapa de agentes por función, sin desarrollo de lógica ni workflows.</p>
-                <button type="button" className="public-button" onClick={() => navigate('catalogo-agentes-ia')}>
-                  Ver catálogo
-                </button>
-              </article>
-              <article className="public-card public-card--highlight">
-                <h3>Jerarquia ReproOrigen XXI</h3>
-                <p>Director, Guardianes y familias de Arquitectos IA con identidad oficial de marca.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('jerarquia-reproorigen')}>
-                  Ver jerarquia
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Comunidad y Fundación</h3>
-                <p>Mapa de colaboradores y líneas de acción fundacional.</p>
-                <button type="button" className="public-button" onClick={() => navigate('comunidad-reproorigen')}>
-                  Ver estructura
-                </button>
-              </article>
-              <article className="public-card public-card--highlight">
-                <h3>ALBATOUR</h3>
-                <p>Operador de experiencias y viajes con propósito conectado al ecosistema ReproOrigen XXI.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('albatour')}>
-                  Ver ALBATOUR
-                </button>
-              </article>
-            </div>
-          </section>
+          <PhotoBanner
+            imageUrl="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80"
+            title="Personas y empresas en movimiento"
+            caption="ReproOrigen XXI transforma complejidad en decisiones claras, visuales y accionables."
+          />
 
-          <section className="public-panel public-panel--stack">
-            <h2>Seis pilares del ecosistema</h2>
-            <div className="public-grid public-grid--cases">
-              {ecosystemPillars.map((pillar) => (
-                <article key={pillar.name} className={`public-card ${pillar.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}>
+          <section className="public-panel public-panel--stack home-chapter">
+            <p className="public-kicker">CAPÍTULO II</p>
+            <h2>Ecosistema oficial ReproOrigen XXI</h2>
+            <div className="public-grid public-grid--cases home-grid-reduced">
+              {chapterEcosystem.map((pillar, index) => (
+                <motion.article
+                  key={pillar.name}
+                  className={`public-card ${pillar.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.45, delay: index * 0.07 }}
+                >
                   <h3>{pillar.name}</h3>
                   <p>{pillar.description}</p>
                   <button type="button" className="public-button" onClick={() => navigate(pillar.route)}>
                     Ir a {routeLabels[pillar.route]}
                   </button>
-                </article>
+                </motion.article>
               ))}
             </div>
           </section>
 
-          <section className="public-panel public-panel--stack">
-            <h2>Mapa Oficial ReproOrigen XXI</h2>
-            <p>Estructura pública de navegación institucional y crecimiento por ecosistemas.</p>
-            <div className="public-grid public-grid--cases">
-              {reproOrigenOfficialMap.map((item) => (
-                <article key={item.name} className={`public-card ${item.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                  {item.route ? (
-                    <button type="button" className="public-button" onClick={() => navigate(item.route!)}>
-                      Ir a {routeLabels[item.route]}
-                    </button>
-                  ) : null}
-                  {item.children ? (
-                    <ul className="public-tree-list">
-                      {item.children.map((child) => (
-                        <li key={child}>{child}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel">
-            <h2>Qué problemas resolvemos</h2>
-            <div className="public-grid">
-              {[
-                'Falta de visibilidad comercial y generación de oportunidades.',
-                'Procesos administrativos lentos, repetitivos o desconectados.',
-                'Dificultad para acceder a subvenciones y financiación.',
-                'Necesidad de coordinación entre áreas, partners y territorio.'
-              ].map((item) => (
-                <article key={item} className="public-card">
-                  <p>{item}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel">
-            <h2>Modelo de activacion de Arquitectos IA</h2>
-            <p>Activamos arquitectos IA especializados por área para que cada organización pueda operar con más capacidad sin aumentar estructura fija: contratación flexible, objetivos claros y seguimiento por resultados.</p>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Nuestra visión</h2>
-            <p>ReproOrigen XXI integra tecnología, inteligencia artificial, personas, territorio y comunidad para construir crecimiento con sentido.</p>
-            <div className="public-grid">
-              {['Tecnología', 'Inteligencia Artificial', 'Personas', 'Territorio', 'Comunidad'].map((item) => (
-                <article key={item} className="public-card">
-                  <h3>{item}</h3>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Cómo trabajamos</h2>
-            <div className="public-grid public-grid--workflow">
-              {workFlow.map((step) => (
-                <article key={step} className="public-card">
-                  <h3>{step}</h3>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Casos de uso</h2>
-            <div className="public-grid public-grid--cases">
-              {useCases.map((item) => (
-                <article key={item.title} className="public-card">
-                  <h3>{item.title}</h3>
-                  <p><strong>Problema:</strong> {item.problem}</p>
-                  <p><strong>Solución ReproOrigen XXI:</strong> {item.solution}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Sectores y ecosistemas</h2>
-            <div className="public-grid">
-              {ecosystems.map((item) => (
-                <article key={item} className="public-card">
-                  <h3>{item}</h3>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel">
-            <h2>Fundación ReproOrigen XXI</h2>
-            <p>Integramos impacto ambiental, educación y comunidad para generar transformación social sostenible en paralelo al crecimiento empresarial.</p>
+          <section className="public-panel home-chapter">
+            <p className="public-kicker">CAPÍTULO III</p>
+            <h2>Activación de Arquitectos IA</h2>
+            <p>Activamos arquitectos IA especializados por área para que cada organización pueda operar con más capacidad, criterio y continuidad editorial.</p>
           </section>
 
           <FinalCta onNavigate={navigate} />
@@ -4516,18 +4425,19 @@ function PublicPage() {
       ) : (
         <>
       <header className="public-header">
-        <div>
-          <strong>{publicConfig.companyName}</strong>
-          <p>{publicConfig.slogan}</p>
-        </div>
-        {currentRoute !== 'inicio' ? (
-          <>
-            <button type="button" className="public-header__menu" onClick={() => setNavOpen((prev) => !prev)} aria-expanded={navOpen} aria-label="Abrir navegación">
-              Menú
-            </button>
-            <PublicTopNav currentRoute={currentRoute} isOpen={navOpen} onNavigate={navigate} />
-          </>
-        ) : null}
+        <button type="button" className="public-header__brand" onClick={() => navigate('inicio')}>
+          <span className="public-header__seal" aria-hidden>
+            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" />
+          </span>
+          <span className="public-header__brand-copy">
+            <strong>{publicConfig.companyName}</strong>
+            <p>{publicConfig.slogan}</p>
+          </span>
+        </button>
+        <button type="button" className="public-header__menu" onClick={() => setNavOpen((prev) => !prev)} aria-expanded={navOpen} aria-label="Abrir navegación">
+          Menú
+        </button>
+        <PublicTopNav currentRoute={currentRoute} isOpen={navOpen} onNavigate={navigate} />
       </header>
       <main>{renderPage()}</main>
       <PublicFooter onNavigate={navigate} />

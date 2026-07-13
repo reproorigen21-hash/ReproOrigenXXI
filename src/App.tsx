@@ -2784,44 +2784,44 @@ function PublicPage() {
     }
 
     if (currentRoute === 'inicio') {
-      const arcaTerritorios: Array<{ emoji: string; nombre: string; subtitulo: string; descripcion: string; route: PublicRoute; className: string }> = [
+      const arcaTerritorios: Array<{ emoji: string; name: string; subtitle: string; description: string; route: PublicRoute; className: string }> = [
         {
           emoji: '🌲',
-          nombre: 'Bosque del Territorio',
-          subtitulo: 'Naturaleza · Revitalización',
-          descripcion: 'Ayuntamientos, naturaleza y proyectos de revitalización territorial.',
+          name: 'Bosque del Territorio',
+          subtitle: 'Naturaleza · Revitalización',
+          description: 'Ayuntamientos, naturaleza y proyectos de revitalización territorial.',
           route: 'sectores',
           className: 'home-map__node--territorio'
         },
         {
           emoji: '🏛️',
-          nombre: 'Ciudad de las Empresas',
-          subtitulo: 'IA · Estrategia · Automatización',
-          descripcion: 'Inteligencia artificial, estrategia empresarial y automatización aplicada.',
+          name: 'Ciudad de las Empresas',
+          subtitle: 'IA · Estrategia · Automatización',
+          description: 'Inteligencia artificial, estrategia empresarial y automatización aplicada.',
           route: 'soluciones',
           className: 'home-map__node--empresas'
         },
         {
           emoji: '⚒️',
-          nombre: 'Forja del Hogar',
-          subtitulo: 'Energía · Ventanas · Rehabilitación',
-          descripcion: 'Rehabilitación energética, ventanas y eficiencia para el hogar y la comunidad.',
+          name: 'Forja del Hogar',
+          subtitle: 'Energía · Ventanas · Rehabilitación',
+          description: 'Rehabilitación energética, ventanas y eficiencia para el hogar y la comunidad.',
           route: 'automatizacion-inteligente',
           className: 'home-map__node--ia'
         },
         {
           emoji: '📚',
-          nombre: 'Biblioteca Viva',
-          subtitulo: 'Campus · Conocimiento · Metodología',
-          descripcion: 'Campus, obras vivas y metodología para construir conocimiento con legado.',
+          name: 'Biblioteca Viva',
+          subtitle: 'Campus · Conocimiento · Metodología',
+          description: 'Campus, obras vivas y metodología para construir conocimiento con legado.',
           route: 'biblioteca-viva',
           className: 'home-map__node--campus'
         },
         {
           emoji: '🌍',
-          nombre: 'Rutas del Origen',
-          subtitulo: 'Experiencias · Viajes',
-          descripcion: 'Experiencias con propósito, viajes educativos y rutas del territorio.',
+          name: 'Rutas del Origen',
+          subtitle: 'Experiencias · Viajes',
+          description: 'Experiencias con propósito, viajes educativos y rutas del territorio.',
           route: 'albatour',
           className: 'home-map__node--experiencias'
         }
@@ -2934,7 +2934,7 @@ function PublicPage() {
             <div className="home-territories__grid">
               {arcaTerritorios.map((territorio, index) => (
                 <motion.button
-                  key={territorio.nombre}
+                  key={territorio.name}
                   type="button"
                   className={`home-territory__card ${territorio.className}`}
                   onClick={() => navigate(territorio.route)}
@@ -2944,9 +2944,9 @@ function PublicPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <span className="home-territory__emoji" aria-hidden="true">{territorio.emoji}</span>
-                  <span className="home-territory__name">{territorio.nombre}</span>
-                  <span className="home-territory__subtitle">{territorio.subtitulo}</span>
-                  <span className="home-territory__desc">{territorio.descripcion}</span>
+                  <span className="home-territory__name">{territorio.name}</span>
+                  <span className="home-territory__subtitle">{territorio.subtitle}</span>
+                  <span className="home-territory__desc">{territorio.description}</span>
                 </motion.button>
               ))}
             </div>

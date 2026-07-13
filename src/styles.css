@@ -250,8 +250,8 @@ button {
 .public-footer__links button,
 .public-button {
   border-radius: var(--brand-radius-pill);
-  border: 1px solid rgba(102, 77, 48, 0.12);
-  background: rgba(255, 250, 244, 0.8);
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 18%, transparent);
+  background: color-mix(in srgb, var(--brand-bg-base) 80%, white);
   color: var(--brand-text);
   padding: 0.75rem 1rem;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -3711,7 +3711,7 @@ button {
   justify-items: center;
   padding: 2.2rem 1rem;
   border-radius: 1.35rem;
-  border: 1px solid rgba(35, 67, 52, 0.2);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 20%, transparent);
   background:
     radial-gradient(circle at 50% 50%, rgba(35, 67, 52, 0.08), transparent 32%),
     linear-gradient(160deg, rgba(248, 244, 236, 0.98), rgba(242, 236, 226, 0.96));
@@ -4230,8 +4230,8 @@ button {
   padding: 0.8rem;
   border-radius: 1rem;
   border: 1px solid rgba(35, 67, 52, 0.2);
-  background: rgba(248, 244, 236, 0.96);
-  box-shadow: 0 14px 26px rgba(35, 67, 52, 0.14);
+  background: color-mix(in srgb, var(--brand-bg-base) 96%, white);
+  box-shadow: 0 14px 26px color-mix(in srgb, var(--brand-primary) 14%, transparent);
 }
 
 .public-nav__dropdown button {

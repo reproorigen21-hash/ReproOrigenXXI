@@ -1945,6 +1945,7 @@ function PublicFooter({ onNavigate }: { onNavigate: (route: PublicRoute) => void
         <p>Construyendo oportunidades para empresas, personas y territorios.</p>
       </div>
       <p className="public-footer__social">{publicConfig.corporateEmail} · {publicConfig.phone}</p>
+      <p className="public-footer__legal">© 2026 ReproOrigen XXI · reproorigen21.com · Burriana, Castellón</p>
       <p className="public-footer__signature" aria-label="Firma del libro">
         <span lang="he" dir="rtl">{bookSignature}</span>
       </p>
@@ -2774,15 +2775,31 @@ function PublicPage() {
     if (currentRoute === 'inicio') {
       return (
         <div className="public-home public-home--editorial">
-          <section className="home-hero" aria-label="Hero ReproOrigen XXI">
+          <section className="home-hero" aria-label="Portada ReproOrigen XXI">
             <div className="home-seal" aria-hidden>
-              <span className="home-seal__mark">SELLO</span>
+              <span className="home-seal__mark">EL SELLO</span>
+              <span className="home-seal__mark">DEL SIGLO</span>
             </div>
-            <p className="home-hero__lead">Cuando todo se detiene, el futuro encuentra un nuevo origen.</p>
             <h1>ReproOrigen XXI</h1>
+            <h2 className="home-hero__subtitle">El Sello del Siglo</h2>
+            <p className="home-hero__lead">Cuando todo se detiene, el futuro encuentra un nuevo origen.</p>
+            <p className="home-hero__description">
+              Agentes de Inteligencia Artificial que impulsan empresas, conectan personas y ayudan a construir un Castellón más próspero, innovador y sostenible.
+            </p>
+            <div className="home-hero__taglines" aria-label="Propuesta de valor">
+              <p className="home-hero__tagline">Automatizamos procesos.</p>
+              <p className="home-hero__tagline">Encontramos oportunidades.</p>
+              <p className="home-hero__tagline">Impulsamos proyectos con propósito.</p>
+            </div>
+            <p className="home-hero__closing">
+              La tecnología solo tiene sentido cuando mejora la vida de las personas y fortalece el territorio que compartimos.
+            </p>
             <div className="home-hero__actions">
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
-                Entrar al ecosistema
+                Descubrir ReproOrigen XXI
+              </button>
+              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('contacto')}>
+                Hablar con un asesor
               </button>
             </div>
           </section>

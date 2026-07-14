@@ -647,10 +647,10 @@ type PublicArchitectureItem = {
 };
 
 const bibliotecaVivaCollections: PublicArchitectureItem[] = [
-  { name: 'Biblioteca Viva', description: 'Libros que ayudan a reflexionar y crecer.' },
-  { name: '21 Cuentos', description: 'Colección principal.' },
-  { name: 'Cuentos Terapéuticos', description: 'Relatos simbólicos para acompañar procesos personales.' },
-  { name: 'Libros Visuales', description: 'Historias ilustradas con identidad cinematográfica.' }
+  { name: 'Biblioteca Viva', description: 'Una biblioteca viva con piedra, madera, pergamino y una sensación constante de descubrimiento.' },
+  { name: '21 Cuentos', description: 'Colección principal concebida como viaje narrativo con legado y misión.' },
+  { name: 'Cuentos Terapéuticos', description: 'Relatos simbólicos que acompañan procesos personales con intimidad, solemnidad y luz cálida.' },
+  { name: 'Libros Visuales', description: 'Fotogramas editoriales: imágenes con alma cinematográfica, nunca estética de banco de fotos.' }
 ];
 
 const editorialRepositoryArchitecture: PublicArchitectureItem[] = [
@@ -2789,7 +2789,7 @@ function PublicPage() {
           emoji: '🌲',
           name: 'Bosque del Territorio',
           subtitle: 'Naturaleza · Revitalización',
-          description: 'Ayuntamientos, naturaleza y proyectos de revitalización territorial.',
+          description: 'Naturaleza épica, mapas de futuro y proyectos de revitalización con memoria de territorio.',
           route: 'sectores',
           className: 'home-map__node--territorio'
         },
@@ -2797,7 +2797,7 @@ function PublicPage() {
           emoji: '🏛️',
           name: 'Ciudad de las Empresas',
           subtitle: 'IA · Estrategia · Automatización',
-          description: 'Inteligencia artificial, estrategia empresarial y automatización aplicada.',
+          description: 'Arquitectura de futuro, estrategia y automatización con raíces antiguas y escala institucional.',
           route: 'soluciones',
           className: 'home-map__node--empresas'
         },
@@ -2805,7 +2805,7 @@ function PublicPage() {
           emoji: '⚒️',
           name: 'Forja del Hogar',
           subtitle: 'Energía · Ventanas · Rehabilitación',
-          description: 'Rehabilitación energética, ventanas y eficiencia para el hogar y la comunidad.',
+          description: 'Materia, técnica y rehabilitación para convertir espacios cotidianos en lugares con carácter y permanencia.',
           route: 'automatizacion-inteligente',
           className: 'home-map__node--ia'
         },
@@ -2813,7 +2813,7 @@ function PublicPage() {
           emoji: '📚',
           name: 'Biblioteca Viva',
           subtitle: 'Campus · Conocimiento · Metodología',
-          description: 'Campus, obras vivas y metodología para construir conocimiento con legado.',
+          description: 'Campus, obras vivas y conocimiento escondido esperando ser descubierto.',
           route: 'biblioteca-viva',
           className: 'home-map__node--campus'
         },
@@ -2821,7 +2821,7 @@ function PublicPage() {
           emoji: '🌍',
           name: 'Rutas del Origen',
           subtitle: 'Experiencias · Viajes',
-          description: 'Experiencias con propósito, viajes educativos y rutas del territorio.',
+          description: 'Rutas con propósito, sentido de misión y legado cultural en movimiento.',
           route: 'albatour',
           className: 'home-map__node--experiencias'
         }
@@ -2902,7 +2902,7 @@ function PublicPage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 1.05 }}
             >
-              Corredores de piedra. Biblioteca subterránea. Una oscuridad cálida que guarda siglos de conocimiento.
+              Corredores de piedra, velas suspendidas y pasadizos que conducen hacia una institución del futuro con raíces antiguas.
             </motion.p>
             <motion.div
               className="home-hero__actions"
@@ -2930,7 +2930,7 @@ function PublicPage() {
           >
             <p className="home-hero__eyebrow">ESCENA II · EL MAPA VIVO</p>
             <h2>El mapa extendido sobre la mesa</h2>
-            <p>Rutas dibujadas a mano, brújula, símbolos y territorios que se iluminan al pasar. Cada zona es una puerta.</p>
+            <p>Mapas antiguos, rutas dibujadas a mano y una sensación de misión: cada territorio guarda historia y espera ser descubierto.</p>
             <div className="home-territories__grid">
               {arcaTerritorios.map((territorio, index) => (
                 <motion.button
@@ -2954,9 +2954,10 @@ function PublicPage() {
 
           {/* ESCENA 3 — El Arca */}
           <PhotoBanner
-            imageUrl="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1800&q=80"
+            variant="archive"
             title="El Arca — Biblioteca Secreta del Origen"
-            caption="Un archivo vivo: biblioteca subterránea, bosque antiguo, cartografía y arquitectura mediterránea fundidos."
+            eyebrow="ESCENA CINEMATOGRÁFICA · ARCHIVO SECRETO"
+            caption="Biblioteca secreta, madera antigua, pergaminos, cartografía y solemnidad arquitectónica. Debe sentirse como un fotograma, no como una foto de stock."
           />
 
           <motion.section
@@ -2969,7 +2970,7 @@ function PublicPage() {
           >
             <p className="public-kicker">ESCENA III · EL ARCA</p>
             <h2>Dentro del Arca</h2>
-            <p className="home-arca__intro">Un archivo vivo. Una biblioteca que guarda conocimiento, métodos, agentes IA, proyectos e historias humanas. Biblioteca secreta, bosque antiguo, cartografía de exploradores, arquitectura mediterránea y tecnología invisible.</p>
+            <p className="home-arca__intro">Un archivo vivo. Una biblioteca secreta de piedra y madera que guarda mapas, reliquias, métodos, agentes IA e historias humanas. Aquí el conocimiento escondido espera ser encontrado.</p>
             <div className="home-arca__contents">
               {arcaContents.map((item, index) => (
                 <motion.div
@@ -2990,9 +2991,10 @@ function PublicPage() {
 
           {/* ESCENA 4 — Los Capítulos */}
           <PhotoBanner
-            imageUrl="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80"
+            variant="journey"
             title="Una saga de descubrimiento, exploración y legado"
-            caption="ReproOrigen XXI no es una web que explica servicios. Es un universo que invita a ser explorado."
+            eyebrow="ESCENA CINEMATOGRÁFICA · TERRITORIO DE MISIÓN"
+            caption="ReproOrigen XXI no debe parecer una web bonita: debe sentirse como un viaje hacia un territorio que tiene historia."
           />
 
           <motion.section
@@ -3894,7 +3896,7 @@ function PublicPage() {
           <section className="public-hero editorial-hero">
             <p className="public-kicker">Biblioteca Viva ReproOrigen XXI</p>
             <h1>Biblioteca Viva ReproOrigen XXI</h1>
-            <p>Libros que ayudan a reflexionar y crecer, con lenguaje visual editorial inspirado en pergamino, luz y naturaleza.</p>
+            <p>Una institución editorial del futuro con raíces antiguas: pergamino, piedra, madera, luz de vela y escenas que parecen fotogramas de una película.</p>
           </section>
 
           <div className="public-panel public-panel--stack editorial-panel">

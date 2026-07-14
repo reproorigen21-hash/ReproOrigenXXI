@@ -3152,6 +3152,77 @@ button {
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  isolation: isolate;
+}
+
+.photo-banner__scene,
+.photo-banner__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.photo-banner__scene {
+  z-index: 0;
+}
+
+.photo-banner__layer {
+  opacity: 0.96;
+}
+
+.photo-banner--archive {
+  border-color: rgba(200, 154, 60, 0.28);
+  background:
+    radial-gradient(circle at 18% 24%, rgba(247, 196, 102, 0.26), transparent 20%),
+    radial-gradient(circle at 82% 78%, rgba(166, 93, 66, 0.22), transparent 22%),
+    linear-gradient(160deg, #17130f 0%, #221a14 46%, #100d0b 100%);
+}
+
+.photo-banner--archive .photo-banner__layer--halo {
+  background:
+    radial-gradient(ellipse at 22% 24%, rgba(247, 209, 131, 0.42) 0%, transparent 14%),
+    radial-gradient(ellipse at 79% 72%, rgba(201, 125, 92, 0.3) 0%, transparent 18%),
+    radial-gradient(ellipse at 50% 12%, rgba(255, 227, 168, 0.12) 0%, transparent 32%);
+}
+
+.photo-banner--archive .photo-banner__layer--texture {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, rgba(120, 85, 48, 0.11) 46px 49px),
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(72, 54, 36, 0.16) 28px 29px);
+  mix-blend-mode: screen;
+}
+
+.photo-banner--archive .photo-banner__layer--detail {
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(16, 12, 10, 0.14) 18%, transparent 36%, transparent 64%, rgba(16, 12, 10, 0.14) 82%, transparent 100%),
+    radial-gradient(circle at 50% 55%, rgba(232, 211, 171, 0.14), transparent 28%);
+}
+
+.photo-banner--journey {
+  border-color: rgba(200, 154, 60, 0.32);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(243, 212, 139, 0.24), transparent 18%),
+    radial-gradient(circle at 84% 18%, rgba(78, 117, 74, 0.2), transparent 22%),
+    linear-gradient(165deg, #d9c5a0 0%, #b99763 38%, #38513d 100%);
+}
+
+.photo-banner--journey .photo-banner__layer--halo {
+  background:
+    radial-gradient(ellipse at 50% 10%, rgba(255, 230, 170, 0.24) 0%, transparent 26%),
+    radial-gradient(ellipse at 18% 72%, rgba(68, 96, 55, 0.3) 0%, transparent 26%);
+}
+
+.photo-banner--journey .photo-banner__layer--texture {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(88, 58, 24, 0.1) 34px 35px),
+    repeating-linear-gradient(90deg, transparent 0 58px, rgba(126, 87, 46, 0.08) 58px 59px);
+}
+
+.photo-banner--journey .photo-banner__layer--detail {
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(22, 25, 19, 0.08) 48%, rgba(22, 25, 19, 0.42) 100%),
+    linear-gradient(115deg, transparent 0 44%, rgba(97, 63, 32, 0.24) 44% 46%, transparent 46% 58%, rgba(97, 63, 32, 0.18) 58% 60%, transparent 60%),
+    radial-gradient(circle at 68% 36%, rgba(247, 226, 181, 0.1), transparent 18%);
 }
 
 .photo-banner__overlay {
@@ -3160,17 +3231,32 @@ button {
   display: flex;
   align-items: flex-end;
   padding: 1.35rem;
-  background: linear-gradient(180deg, rgba(4, 10, 20, 0.12), rgba(4, 10, 20, 0.86));
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(4, 10, 20, 0.08), rgba(4, 10, 20, 0.84));
+}
+
+.photo-banner__eyebrow {
+  display: block;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(246, 219, 165, 0.92);
 }
 
 .photo-banner__overlay strong {
   color: #f8fafc;
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  font-family: var(--brand-display-family);
+  font-size: clamp(1.4rem, 2.8vw, 2.3rem);
+  letter-spacing: 0.04em;
 }
 
 .photo-banner__overlay p {
-  margin: 0.35rem 0 0;
-  color: #d8e3ef;
+  margin: 0.45rem 0 0;
+  max-width: 58ch;
+  color: rgba(232, 226, 213, 0.9);
+  font-family: var(--brand-reading-family);
 }
 
 @media (max-width: 640px) {
@@ -4842,7 +4928,7 @@ button {
   font-family: var(--brand-display-family);
   font-size: clamp(1.05rem, 1.9vw, 1.35rem);
   font-style: italic;
-  color: rgba(232, 213, 184, 0.78);
+  color: rgba(232, 213, 184, 0.84);
   line-height: 1.6;
   margin-top: 0;
 }

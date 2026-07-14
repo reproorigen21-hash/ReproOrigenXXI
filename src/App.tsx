@@ -1805,22 +1805,40 @@ function PublicContactForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus('Formulario validado. Preparado para conectar con CRM en la siguiente misión.');
+    setStatus('Formulario recibido. Respondemos personalmente en menos de 24 horas laborables.');
   };
 
   return (
     <form className="form-card" onSubmit={handleSubmit}>
-      <h3>Formulario de contacto</h3>
-      <p>Captura visual preparada para integración CRM.</p>
+      <h3>Quiero hablar con ReproOrigen XXI</h3>
       {status ? <p className="public-form__status">{status}</p> : null}
-      <input name="nombre" placeholder="Nombre" minLength={2} required />
-      <input name="empresa" placeholder="Empresa" minLength={2} required />
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="telefono" type="tel" placeholder="Teléfono" pattern="^[0-9+()\s-]{7,20}$" title="Introduce un teléfono válido." required />
-      <input name="sector" placeholder="Sector" minLength={2} required />
-      <input name="necesidad" placeholder="Qué necesitas" minLength={4} required />
-      <textarea name="mensaje" placeholder="Mensaje" rows={5} minLength={10} required />
-      <button type="submit">Contactar</button>
+      <label htmlFor="cf-nombre">Nombre</label>
+      <input id="cf-nombre" name="nombre" placeholder="Tu nombre completo" minLength={2} required />
+      <label htmlFor="cf-telefono">Teléfono</label>
+      <input id="cf-telefono" name="telefono" type="tel" placeholder="+34 6XX XXX XXX" pattern="^[0-9+()\s-]{7,20}$" title="Introduce un teléfono válido." required />
+      <label htmlFor="cf-email">Correo electrónico</label>
+      <input id="cf-email" name="email" type="email" placeholder="tu@correo.com" required />
+      <label htmlFor="cf-empresa">Empresa u organización <span className="form-card__optional">(opcional, pero muy recomendable)</span></label>
+      <input id="cf-empresa" name="empresa" placeholder="Nombre de tu empresa, asociación o ayuntamiento" />
+      <label htmlFor="cf-area">En qué podemos ayudarte</label>
+      <select id="cf-area" name="area" required>
+        <option value="">Selecciona el área de interés...</option>
+        <option>Reformas</option>
+        <option>Ventanas</option>
+        <option>Energía solar</option>
+        <option>Administradores de fincas</option>
+        <option>Gestorías</option>
+        <option>Autónomos y PYMES</option>
+        <option>Sector cerámico</option>
+        <option>Cooperativas agrícolas</option>
+        <option>Otro</option>
+      </select>
+      <label htmlFor="cf-mensaje">Cómo podemos ayudarte</label>
+      <textarea id="cf-mensaje" name="mensaje" placeholder="Cuéntanos brevemente tu proyecto, reto o idea..." rows={5} minLength={10} required />
+      <button type="submit">Quiero hablar con ReproOrigen XXI</button>
+      {!status ? (
+        <p className="form-card__closing-quote">"Toda transformación comienza cuando alguien decide dar el primer paso. Nosotros caminaremos contigo el resto del camino."</p>
+      ) : null}
     </form>
   );
 }
@@ -1940,11 +1958,12 @@ function NicheActivationForm() {
 function PublicFooter({ onNavigate }: { onNavigate: (route: PublicRoute) => void }) {
   return (
     <footer className="public-footer">
-      <div>
-        <strong>{publicConfig.companyName}</strong>
-        <p>{publicConfig.entities.foundation}</p>
-        <p>{publicConfig.entities.bibliotecaViva}</p>
-        <p>{publicConfig.entities.albatour}</p>
+      <div className="public-footer__brand">
+        <img src="/sello-reproorigen-oficial.png" alt="Sello ReproOrigen XXI" className="public-footer__seal" loading="lazy" decoding="async" />
+        <div>
+          <strong>{publicConfig.companyName}</strong>
+          <p>{publicConfig.slogan}</p>
+        </div>
       </div>
       <div className="public-footer__links">
         <button type="button" onClick={() => onNavigate('aviso-legal')}>Aviso Legal</button>
@@ -1952,14 +1971,8 @@ function PublicFooter({ onNavigate }: { onNavigate: (route: PublicRoute) => void
         <button type="button" onClick={() => onNavigate('cookies')}>Cookies</button>
         <button type="button" onClick={() => onNavigate('contacto')}>Contacto</button>
       </div>
-      <div className="public-footer__institutional">
-        <p>{publicConfig.slogan}</p>
-        <p>Construyendo oportunidades para empresas, personas y territorios.</p>
-      </div>
       <p className="public-footer__social">{publicConfig.corporateEmail} · {publicConfig.phone}</p>
-      <p className="public-footer__signature" aria-label="Firma del libro">
-        <span lang="he" dir="rtl">{bookSignature}</span>
-      </p>
+      <p className="public-footer__copyright">© 2026 {publicConfig.companyName} · reproorigen21.com · {publicConfig.address}</p>
     </footer>
   );
 }
@@ -2865,61 +2878,132 @@ function PublicPage() {
       return (
         <div className="public-home public-home--editorial">
 
-          {/* ESCENA 1 — Los pasadizos del origen */}
+          {/* HERO — ReproOrigen XXI · El Sello del Siglo */}
           <motion.section
-            className="home-hero home-hero--cinematic home-hero--despertar"
-            aria-label="Los pasadizos del origen — ReproOrigen XXI"
+            className="home-hero home-hero--cinematic home-hero--landscape"
+            aria-label="ReproOrigen XXI — El Sello del Siglo"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           >
+            <motion.p
+              className="home-hero__seal-label"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
+            >
+              Sello ReproOrigen XXI
+            </motion.p>
             <motion.div
               className="home-seal"
               initial={{ scale: 0.82, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
             >
-              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI — emblema del viaje" loading="eager" decoding="async" />
+              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI — El Sello del Siglo" loading="eager" decoding="async" />
             </motion.div>
             <motion.p
-              className="home-hero__eyebrow"
+              className="home-hero__brand-tag"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.7 }}
+              transition={{ duration: 0.9, delay: 0.65 }}
             >
-              ESCENA I · LOS PASADIZOS DEL ORIGEN
+              REPROORIGEN XXI&nbsp;&nbsp;·&nbsp;&nbsp;El Sello del Siglo
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
             >
-              El origen de una nueva era.
+              Cuando todo se detiene,<br />el futuro encuentra<br />un nuevo origen.
             </motion.h1>
             <motion.p
               className="home-hero__lead"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 1.05 }}
+              transition={{ duration: 0.9, delay: 1.0 }}
             >
-              Corredores de piedra, velas suspendidas y pasadizos que conducen hacia una institución del futuro con raíces antiguas.
+              Agentes de Inteligencia Artificial que trabajan por tu empresa, conectan a las personas y ayudan a construir un Castellón más próspero, innovador y sostenible.
             </motion.p>
             <motion.div
               className="home-hero__actions"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.25 }}
+              transition={{ duration: 0.7, delay: 1.2 }}
             >
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
-                Iniciar el viaje
+                Descubrir ReproOrigen XXI
               </button>
-              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('mapa-conocimiento')}>
-                Ver el mapa
+              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('contacto')}>
+                Hablar con un Asesor
               </button>
+            </motion.div>
+            <motion.div
+              className="home-hero__location"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+            >
+              <span>Burriana · Castellón · España</span>
+              <span className="home-hero__est">Est. 2021</span>
             </motion.div>
           </motion.section>
 
-          {/* ESCENA 2 — El mapa vivo */}
+          {/* SECCIÓN — RE / PRO / ORIGEN / 21 */}
+          <motion.section
+            className="home-acronym"
+            aria-label="El significado de ReproOrigen XXI"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
+          >
+            {[
+              { code: 'RE', meaning: 'renovar · reconstruir' },
+              { code: 'PRO', meaning: 'progreso · profesionalización' },
+              { code: 'ORIGEN', meaning: 'punto de partida' },
+              { code: '21', meaning: 'los retos de nuestro siglo XXI' }
+            ].map((item, index) => (
+              <motion.div
+                key={item.code}
+                className="home-acronym__item"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.45, delay: index * 0.1 }}
+              >
+                <strong className="home-acronym__code">{item.code}</strong>
+                <span className="home-acronym__meaning">{item.meaning}</span>
+              </motion.div>
+            ))}
+          </motion.section>
+
+          {/* SECCIÓN — Sectores */}
+          <motion.section
+            className="home-sectors"
+            aria-label="Sectores que transformamos"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
+          >
+            <ul className="home-sectors__list">
+              {[
+                'Reformas',
+                'Ventanas',
+                'Energía solar',
+                'Administradores de fincas',
+                'Gestorías',
+                'Autónomos y PYMES',
+                'Sector cerámico',
+                'Cooperativas agrícolas'
+              ].map((sector) => (
+                <li key={sector}>{sector}</li>
+              ))}
+            </ul>
+          </motion.section>
+
+          {/* SECCIÓN — El mapa vivo */}
           <motion.section
             className="home-map home-map--cinematic home-map--territories"
             aria-label="El mapa vivo — cinco territorios"
@@ -3027,6 +3111,34 @@ function PublicPage() {
                   )}
                 </motion.article>
               ))}
+            </div>
+          </motion.section>
+
+          {/* MANIFIESTO */}
+          <motion.section
+            className="home-manifesto"
+            aria-label="Manifiesto ReproOrigen XXI"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <blockquote className="home-manifesto__quote">
+              "Nuestro planeta es el lugar más maravilloso del universo conocido. Cada árbol que protegemos, cada pueblo que recuperamos y cada persona a la que ayudamos es una coordenada más en el mapa de la Tierra Prometida."
+            </blockquote>
+            <div className="home-manifesto__body">
+              <p>ReproOrigen XXI no busca un mundo mejor.</p>
+              <p className="home-manifesto__emphasis">Lo construye.</p>
+              <p>Pueblo a pueblo.</p>
+              <p>Árbol a árbol.</p>
+              <p>Persona a persona.</p>
+              <p>Porque la Tierra Prometida comienza allí donde alguien decide cuidar lo que ama.</p>
+            </div>
+            <div className="home-manifesto__seal" aria-hidden="true">
+              <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" />
+              <span>ReproOrigen XXI</span>
+              <span className="home-manifesto__seal-sub">El Sello del Siglo</span>
+              <p className="home-manifesto__seal-quote">"Cuando todo se detiene, algo nuevo puede empezar."</p>
             </div>
           </motion.section>
 
@@ -4430,25 +4542,53 @@ function PublicPage() {
 
     if (currentRoute === 'contacto') {
       return (
-        <section className="public-contact">
-          <div className="public-contact__copy">
-            <h1>Contacto</h1>
-            <p>Cuéntanos qué necesitas y preparamos una propuesta inicial para tu organización.</p>
-            <p>Este formulario no guarda datos todavía y queda listo para conectar al CRM en la siguiente misión.</p>
-            <div className="public-hero__actions">
-              <button type="button" className="public-button public-button--primary" onClick={() => navigate('solicitar-diagnostico')}>
-                Solicitar diagnóstico
-              </button>
-              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('reservar-reunion')}>
-                Reservar reunión
-              </button>
-            </div>
+        <section className="public-contact public-contact--hablemos">
+          <div className="public-contact__header">
+            <p className="public-kicker">Contacto</p>
+            <h1>Hablemos.</h1>
+            <p className="public-contact__headline">El futuro se construye conversando.<br />Empieza hoy el cambio que quieres ver mañana.</p>
+            <p>
+              Tanto si diriges una empresa que desea incorporar Agentes de Inteligencia Artificial, como si representas a un ayuntamiento, una asociación o simplemente quieres formar parte de la comunidad ReproOrigen XXI, estaremos encantados de escucharte.
+            </p>
+            <p>
+              Analizamos cada proyecto de forma personalizada para encontrar soluciones reales, optimizar recursos, ahorrar tiempo y descubrir oportunidades de financiación, subvenciones y colaboración.
+            </p>
+            <p className="public-contact__personal-note">La primera conversación siempre comienza escuchando.</p>
           </div>
+
+          <div className="public-contact__info-grid">
+            <a className="public-contact__info-card" href={`tel:${publicConfig.phone.replace(/\s/g, '')}`}>
+              <span className="public-contact__info-label">Teléfono</span>
+              <strong>{publicConfig.phone}</strong>
+            </a>
+            <a className="public-contact__info-card" href={`mailto:${publicConfig.corporateEmail}`}>
+              <span className="public-contact__info-label">Correo electrónico</span>
+              <strong>{publicConfig.corporateEmail}</strong>
+            </a>
+            <div className="public-contact__info-card">
+              <span className="public-contact__info-label">Ubicación</span>
+              <strong>{publicConfig.address}</strong>
+            </div>
+            <a
+              className="public-contact__info-card public-contact__info-card--whatsapp"
+              href={`https://wa.me/${publicConfig.phone.replace(/[^0-9]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="public-contact__info-label">Mensaje por WhatsApp</span>
+              <strong>Escribir ahora →</strong>
+            </a>
+          </div>
+
+          <div className="public-contact__guarantee">
+            <p><strong>Garantía</strong></p>
+            <p>Respondemos personalmente en menos de 24 horas laborables.</p>
+            <p>Cada consulta recibe un estudio inicial para orientarte sobre las mejores opciones antes de tomar cualquier decisión.</p>
+          </div>
+
           <div className="public-contact__forms">
             <PublicContactForm />
-            <MeetingReservationCard />
           </div>
-          <FinalCta onNavigate={navigate} />
         </section>
       );
     }

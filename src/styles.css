@@ -5069,3 +5069,432 @@ button {
       'campus';
   }
 }
+
+/* ══════════════════════════════════════════════
+   HERO — Landscape variant (El Sello del Siglo)
+   Warm golden hills at dawn · Misty valleys
+   ══════════════════════════════════════════════ */
+.home-hero--landscape {
+  min-height: min(96vh, 920px);
+  border-color: rgba(200, 154, 60, 0.3);
+  background:
+    /* Horizon glow — warm amber sunrise */
+    radial-gradient(ellipse 90% 40% at 50% 52%, rgba(220, 160, 70, 0.38) 0%, transparent 55%),
+    /* Sky — blue-gray atmospheric layer */
+    radial-gradient(ellipse at 50% 0%, rgba(80, 105, 140, 0.35) 0%, transparent 42%),
+    /* Left warm edge */
+    radial-gradient(ellipse at 0% 45%, rgba(200, 130, 50, 0.18) 0%, transparent 32%),
+    /* Right warm edge */
+    radial-gradient(ellipse at 100% 42%, rgba(180, 120, 50, 0.15) 0%, transparent 30%),
+    /* Deep shadows at bottom — dark rolling hills */
+    linear-gradient(180deg,
+      rgba(55, 75, 100, 0.82) 0%,
+      rgba(90, 110, 80, 0.55) 22%,
+      rgba(190, 145, 65, 0.65) 42%,
+      rgba(120, 100, 55, 0.75) 62%,
+      rgba(45, 40, 28, 0.92) 82%,
+      #1a180f 100%
+    );
+  color: #f5ead8;
+}
+
+.home-hero--landscape::before {
+  background:
+    /* Misty atmospheric haze */
+    radial-gradient(ellipse 80% 28% at 50% 44%, rgba(240, 200, 130, 0.22) 0%, transparent 60%),
+    /* Subtle film grain texture */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(255, 230, 160, 0.012) 3px,
+      rgba(255, 230, 160, 0.012) 4px
+    );
+}
+
+.home-hero--landscape h1 {
+  color: #f5ead8;
+  font-size: clamp(1.9rem, 5.2vw, 4.8rem);
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.5), 0 0 60px rgba(200, 140, 50, 0.1);
+  font-style: italic;
+}
+
+.home-hero--landscape .home-hero__lead {
+  color: rgba(245, 234, 216, 0.85);
+  font-size: clamp(1rem, 1.9vw, 1.35rem);
+  max-width: 52ch;
+}
+
+.home-hero--landscape .home-hero__eyebrow,
+.home-hero--landscape .home-hero__brand-tag {
+  color: rgba(200, 154, 60, 0.95);
+  letter-spacing: 0.15em;
+}
+
+.home-hero--landscape .home-seal {
+  box-shadow:
+    0 0 0 1px rgba(200, 154, 60, 0.5) inset,
+    0 40px 90px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(200, 140, 50, 0.22);
+  border-color: rgba(200, 154, 60, 0.6);
+  background:
+    radial-gradient(ellipse at 35% 28%, rgba(200, 154, 60, 0.35), rgba(24, 19, 12, 0.95) 62%),
+    #1a150e;
+}
+
+.home-hero--landscape .public-button--primary {
+  background: linear-gradient(135deg, #c89a3c, #a65d42);
+  border-color: rgba(200, 154, 60, 0.6);
+  color: #1c1a14;
+  font-weight: 700;
+}
+
+.home-hero--landscape .public-button--secondary {
+  background: rgba(245, 234, 216, 0.08);
+  border-color: rgba(245, 234, 216, 0.24);
+  color: rgba(245, 234, 216, 0.9);
+}
+
+.home-hero__seal-label {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--brand-display-family);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: rgba(200, 154, 60, 0.85);
+}
+
+.home-hero__brand-tag {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--brand-font-family);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(200, 154, 60, 0.9);
+}
+
+.home-hero__location {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+  font-family: var(--brand-font-family);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 234, 216, 0.6);
+}
+
+.home-hero__est {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 154, 60, 0.3);
+  color: rgba(200, 154, 60, 0.75);
+  font-size: 0.72rem;
+}
+
+/* ══════════════════════════════════════════════
+   SECCIÓN — RE / PRO / ORIGEN / 21
+   ══════════════════════════════════════════════ */
+.home-acronym {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(35, 67, 52, 0.18);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(200, 154, 60, 0.07), transparent 60%),
+    linear-gradient(160deg, rgba(248, 244, 236, 0.98), rgba(242, 235, 220, 0.96));
+}
+
+.home-acronym__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  padding: 1.2rem 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(35, 67, 52, 0.12);
+  background: rgba(255, 252, 245, 0.7);
+}
+
+.home-acronym__code {
+  font-family: var(--brand-display-family);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.home-acronym__meaning {
+  font-family: var(--brand-reading-family);
+  font-size: 0.82rem;
+  color: var(--brand-secondary);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .home-acronym {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   SECCIÓN — Sectores
+   ══════════════════════════════════════════════ */
+.home-sectors {
+  padding: 2rem 1.5rem;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(35, 67, 52, 0.14);
+  background: linear-gradient(160deg, rgba(248, 244, 236, 0.98), rgba(240, 233, 218, 0.96));
+}
+
+.home-sectors__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  justify-content: center;
+}
+
+.home-sectors__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--brand-reading-family);
+  font-size: 0.97rem;
+  color: var(--brand-text);
+}
+
+.home-sectors__list li::before {
+  content: '•';
+  color: var(--brand-secondary);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════════════
+   MANIFIESTO
+   ══════════════════════════════════════════════ */
+.home-manifesto {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+  border-radius: 1.6rem;
+  border: 1px solid rgba(35, 67, 52, 0.2);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(200, 154, 60, 0.1), transparent 50%),
+    linear-gradient(170deg, #1d1a12 0%, #2a2218 55%, #1a160e 100%);
+  color: rgba(245, 234, 216, 0.88);
+  text-align: center;
+}
+
+.home-manifesto__quote {
+  margin: 0;
+  font-family: var(--brand-display-family);
+  font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(200, 154, 60, 0.92);
+  border: none;
+  padding: 0;
+  max-width: 68ch;
+  justify-self: center;
+}
+
+.home-manifesto__body {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.home-manifesto__body p {
+  margin: 0;
+  font-family: var(--brand-reading-family);
+  font-size: 1.05rem;
+  color: rgba(245, 234, 216, 0.82);
+  line-height: 1.7;
+}
+
+.home-manifesto__emphasis {
+  font-family: var(--brand-display-family) !important;
+  font-size: clamp(1.4rem, 3.5vw, 2.8rem) !important;
+  font-style: italic;
+  color: #f5ead8 !important;
+}
+
+.home-manifesto__seal {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.home-manifesto__seal img {
+  width: clamp(80px, 12vw, 110px);
+  height: clamp(80px, 12vw, 110px);
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.home-manifesto__seal span {
+  font-family: var(--brand-display-family);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: rgba(245, 234, 216, 0.9);
+}
+
+.home-manifesto__seal-sub {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase;
+  color: rgba(200, 154, 60, 0.8) !important;
+}
+
+.home-manifesto__seal-quote {
+  margin: 0.4rem 0 0;
+  font-family: var(--brand-reading-family);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(245, 234, 216, 0.6);
+}
+
+/* ══════════════════════════════════════════════
+   CONTACTO — Hablemos
+   ══════════════════════════════════════════════ */
+.public-contact--hablemos {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.public-contact__header h1 {
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.95;
+  color: var(--brand-primary);
+}
+
+.public-contact__headline {
+  font-family: var(--brand-display-family);
+  font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  font-style: italic;
+  color: var(--brand-secondary);
+  line-height: 1.4;
+}
+
+.public-contact__personal-note {
+  font-family: var(--brand-display-family);
+  font-style: italic;
+  color: var(--brand-primary);
+}
+
+.public-contact__info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.public-contact__info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: 1rem;
+  border: 1px solid var(--brand-border);
+  background: rgba(255, 252, 245, 0.7);
+  text-decoration: none;
+  color: var(--brand-text);
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.public-contact__info-card:hover {
+  box-shadow: 0 8px 20px rgba(35, 67, 52, 0.1);
+  border-color: rgba(180, 107, 63, 0.3);
+}
+
+.public-contact__info-card--whatsapp {
+  border-color: rgba(37, 158, 80, 0.3);
+  background: rgba(240, 252, 244, 0.7);
+}
+
+.public-contact__info-card--whatsapp:hover {
+  border-color: rgba(37, 158, 80, 0.5);
+}
+
+.public-contact__info-label {
+  font-family: var(--brand-font-family);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-secondary);
+}
+
+.public-contact__guarantee {
+  padding: 1.2rem 1.6rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(35, 67, 52, 0.16);
+  background: rgba(35, 67, 52, 0.05);
+}
+
+.public-contact__guarantee p {
+  margin: 0 0 0.4rem;
+  font-size: 0.92rem;
+}
+
+/* ══════════════════════════════════════════════
+   FORM — Extended styles
+   ══════════════════════════════════════════════ */
+.form-card__optional {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(42, 42, 36, 0.55);
+  font-weight: 400;
+}
+
+.form-card__closing-quote {
+  margin: 0.75rem 0 0;
+  font-family: var(--brand-display-family);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(42, 42, 36, 0.6);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER — Updated
+   ══════════════════════════════════════════════ */
+.public-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.public-footer__seal {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.public-footer__copyright {
+  width: 100%;
+  font-size: 0.78rem;
+  color: rgba(42, 42, 36, 0.5);
+  letter-spacing: 0.04em;
+  margin: 0;
+}

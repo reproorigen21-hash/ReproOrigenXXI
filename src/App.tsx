@@ -1818,8 +1818,9 @@ function PublicContactForm() {
       <input id="cf-telefono" name="telefono" type="tel" placeholder="+34 6XX XXX XXX" pattern="^[0-9+()\s-]{7,20}$" title="Introduce un teléfono válido." required />
       <label htmlFor="cf-email">Correo electrónico</label>
       <input id="cf-email" name="email" type="email" placeholder="tu@correo.com" required />
-      <label htmlFor="cf-empresa">Empresa u organización <span className="form-card__optional">(opcional, pero muy recomendable)</span></label>
-      <input id="cf-empresa" name="empresa" placeholder="Nombre de tu empresa, asociación o ayuntamiento" />
+      <label htmlFor="cf-empresa">Empresa u organización</label>
+      <span id="cf-empresa-hint" className="form-card__optional">(opcional, pero muy recomendable)</span>
+      <input id="cf-empresa" name="empresa" placeholder="Nombre de tu empresa, asociación o ayuntamiento" aria-describedby="cf-empresa-hint" />
       <label htmlFor="cf-area">En qué podemos ayudarte</label>
       <select id="cf-area" name="area" required>
         <option value="">Selecciona el área de interés...</option>

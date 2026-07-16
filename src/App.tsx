@@ -1,8 +1,10 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { OSProvider, useOS } from './context/OSContext';
 import { publicConfig } from './config/publicConfig';
 import { mision004Service } from './mision004/services';
 import type { Factura } from './mision004/types';
+import { PhotoBanner } from './components/PhotoBanner';
 
 const publicRoutes = [
   'inicio',
@@ -645,10 +647,10 @@ type PublicArchitectureItem = {
 };
 
 const bibliotecaVivaCollections: PublicArchitectureItem[] = [
-  { name: 'Biblioteca Viva', description: 'Libros que ayudan a reflexionar y crecer.' },
-  { name: '21 Cuentos', description: 'Colección principal.' },
-  { name: 'Cuentos Terapéuticos', description: 'Relatos simbólicos para acompañar procesos personales.' },
-  { name: 'Libros Visuales', description: 'Historias ilustradas con identidad cinematográfica.' }
+  { name: 'Biblioteca Viva', description: 'Una biblioteca viva con piedra, madera, pergamino y una sensación constante de descubrimiento.' },
+  { name: '21 Cuentos', description: 'Colección principal concebida como viaje narrativo con legado y misión.' },
+  { name: 'Cuentos Terapéuticos', description: 'Relatos simbólicos que acompañan procesos personales con intimidad, solemnidad y luz cálida.' },
+  { name: 'Libros Visuales', description: 'Fotogramas editoriales: imágenes con alma cinematográfica, nunca estética de banco de fotos.' }
 ];
 
 const editorialRepositoryArchitecture: PublicArchitectureItem[] = [
@@ -1741,29 +1743,39 @@ function isPublicRoute(route: string | null): route is PublicRoute {
 }
 
 function PublicTopNav({ currentRoute, isOpen, onNavigate }: { currentRoute: PublicRoute; isOpen: boolean; onNavigate: (route: PublicRoute) => void }) {
-  const menuRoutes: PublicRoute[] = [
-    'inicio',
-    'mapa-conocimiento',
-    'biblioteca-viva',
+  const primaryRoutes: PublicRoute[] = ['inicio', 'soluciones', 'mapa-conocimiento', 'biblioteca-viva', 'editorial-reproorigen', 'contacto'];
+  const ecosystemRoutes: PublicRoute[] = [
     'escuela-editorial',
-    'editorial-reproorigen',
     'la-llegada-de-la-promesa',
     'albatour',
     'campus-reproorigen',
     'catalogo-agentes-ia',
     'jerarquia-reproorigen',
     'comunidad-reproorigen',
-    'fundacion',
-    'contacto'
+    'fundacion'
   ];
+
+  const activeEcosystem = ecosystemRoutes.includes(currentRoute);
 
   return (
     <nav className={`public-nav ${isOpen ? 'is-open' : ''}`}>
-      {menuRoutes.map((route) => (
-        <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
-          {routeLabels[route]}
-        </button>
-      ))}
+      <div className="public-nav__primary">
+        {primaryRoutes.map((route) => (
+          <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
+            {routeLabels[route]}
+          </button>
+        ))}
+      </div>
+      <details className={`public-nav__ecosystem ${activeEcosystem ? 'is-active' : ''}`}>
+        <summary>Ecosistema</summary>
+        <div className="public-nav__dropdown">
+          {ecosystemRoutes.map((route) => (
+            <button key={route} type="button" className={currentRoute === route ? 'active' : ''} onClick={() => onNavigate(route)}>
+              {routeLabels[route]}
+            </button>
+          ))}
+        </div>
+      </details>
     </nav>
   );
 }
@@ -1793,22 +1805,41 @@ function PublicContactForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus('Formulario validado. Preparado para conectar con CRM en la siguiente misión.');
+    setStatus('Formulario recibido. Respondemos personalmente en menos de 24 horas laborables.');
   };
 
   return (
     <form className="form-card" onSubmit={handleSubmit}>
-      <h3>Formulario de contacto</h3>
-      <p>Captura visual preparada para integración CRM.</p>
+      <h3>Quiero hablar con ReproOrigen XXI</h3>
       {status ? <p className="public-form__status">{status}</p> : null}
-      <input name="nombre" placeholder="Nombre" minLength={2} required />
-      <input name="empresa" placeholder="Empresa" minLength={2} required />
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="telefono" type="tel" placeholder="Teléfono" pattern="^[0-9+()\s-]{7,20}$" title="Introduce un teléfono válido." required />
-      <input name="sector" placeholder="Sector" minLength={2} required />
-      <input name="necesidad" placeholder="Qué necesitas" minLength={4} required />
-      <textarea name="mensaje" placeholder="Mensaje" rows={5} minLength={10} required />
-      <button type="submit">Contactar</button>
+      <label htmlFor="cf-nombre">Nombre</label>
+      <input id="cf-nombre" name="nombre" placeholder="Tu nombre completo" minLength={2} required />
+      <label htmlFor="cf-telefono">Teléfono</label>
+      <input id="cf-telefono" name="telefono" type="tel" placeholder="+34 6XX XXX XXX" pattern="^[0-9+()\s-]{7,20}$" title="Introduce un teléfono válido." required />
+      <label htmlFor="cf-email">Correo electrónico</label>
+      <input id="cf-email" name="email" type="email" placeholder="tu@correo.com" required />
+      <label htmlFor="cf-empresa">Empresa u organización</label>
+      <span id="cf-empresa-hint" className="form-card__optional">(opcional, pero muy recomendable)</span>
+      <input id="cf-empresa" name="empresa" placeholder="Nombre de tu empresa, asociación o ayuntamiento" aria-describedby="cf-empresa-hint" />
+      <label htmlFor="cf-area">En qué podemos ayudarte</label>
+      <select id="cf-area" name="area" required>
+        <option value="">Selecciona el área de interés...</option>
+        <option>Reformas</option>
+        <option>Ventanas</option>
+        <option>Energía solar</option>
+        <option>Administradores de fincas</option>
+        <option>Gestorías</option>
+        <option>Autónomos y PYMES</option>
+        <option>Sector cerámico</option>
+        <option>Cooperativas agrícolas</option>
+        <option>Otro</option>
+      </select>
+      <label htmlFor="cf-mensaje">Cómo podemos ayudarte</label>
+      <textarea id="cf-mensaje" name="mensaje" placeholder="Cuéntanos brevemente tu proyecto, reto o idea..." rows={5} minLength={10} required />
+      <button type="submit">Quiero hablar con ReproOrigen XXI</button>
+      {!status ? (
+        <p className="form-card__closing-quote">"Toda transformación comienza cuando alguien decide dar el primer paso. Nosotros caminaremos contigo el resto del camino."</p>
+      ) : null}
     </form>
   );
 }
@@ -1928,11 +1959,12 @@ function NicheActivationForm() {
 function PublicFooter({ onNavigate }: { onNavigate: (route: PublicRoute) => void }) {
   return (
     <footer className="public-footer">
-      <div>
-        <strong>{publicConfig.companyName}</strong>
-        <p>{publicConfig.entities.foundation}</p>
-        <p>{publicConfig.entities.bibliotecaViva}</p>
-        <p>{publicConfig.entities.albatour}</p>
+      <div className="public-footer__brand">
+        <img src="/sello-reproorigen-oficial.png" alt="Sello ReproOrigen XXI" className="public-footer__seal" loading="lazy" decoding="async" />
+        <div>
+          <strong>{publicConfig.companyName}</strong>
+          <p>{publicConfig.slogan}</p>
+        </div>
       </div>
       <div className="public-footer__links">
         <button type="button" onClick={() => onNavigate('aviso-legal')}>Aviso Legal</button>
@@ -1940,14 +1972,8 @@ function PublicFooter({ onNavigate }: { onNavigate: (route: PublicRoute) => void
         <button type="button" onClick={() => onNavigate('cookies')}>Cookies</button>
         <button type="button" onClick={() => onNavigate('contacto')}>Contacto</button>
       </div>
-      <div className="public-footer__institutional">
-        <p>{publicConfig.slogan}</p>
-        <p>Construyendo oportunidades para empresas, personas y territorios.</p>
-      </div>
       <p className="public-footer__social">{publicConfig.corporateEmail} · {publicConfig.phone}</p>
-      <p className="public-footer__signature" aria-label="Firma del libro">
-        <span lang="he" dir="rtl">{bookSignature}</span>
-      </p>
+      <p className="public-footer__copyright">© 2026 {publicConfig.companyName} · reproorigen21.com · {publicConfig.address}</p>
     </footer>
   );
 }
@@ -2772,238 +2798,350 @@ function PublicPage() {
     }
 
     if (currentRoute === 'inicio') {
+      const arcaTerritorios: Array<{ emoji: string; name: string; subtitle: string; description: string; route: PublicRoute; className: string }> = [
+        {
+          emoji: '🌲',
+          name: 'Bosque del Territorio',
+          subtitle: 'Naturaleza · Revitalización',
+          description: 'Naturaleza épica, mapas de futuro y proyectos de revitalización con memoria de territorio.',
+          route: 'sectores',
+          className: 'home-map__node--territorio'
+        },
+        {
+          emoji: '🏛️',
+          name: 'Ciudad de las Empresas',
+          subtitle: 'IA · Estrategia · Automatización',
+          description: 'Arquitectura de futuro, estrategia y automatización con raíces antiguas y escala institucional.',
+          route: 'soluciones',
+          className: 'home-map__node--empresas'
+        },
+        {
+          emoji: '⚒️',
+          name: 'Forja del Hogar',
+          subtitle: 'Energía · Ventanas · Rehabilitación',
+          description: 'Materia, técnica y rehabilitación para convertir espacios cotidianos en lugares con carácter y permanencia.',
+          route: 'automatizacion-inteligente',
+          className: 'home-map__node--ia'
+        },
+        {
+          emoji: '📚',
+          name: 'Biblioteca Viva',
+          subtitle: 'Campus · Conocimiento · Metodología',
+          description: 'Campus, obras vivas y conocimiento escondido esperando ser descubierto.',
+          route: 'biblioteca-viva',
+          className: 'home-map__node--campus'
+        },
+        {
+          emoji: '🌍',
+          name: 'Rutas del Origen',
+          subtitle: 'Experiencias · Viajes',
+          description: 'Rutas con propósito, sentido de misión y legado cultural en movimiento.',
+          route: 'albatour',
+          className: 'home-map__node--experiencias'
+        }
+      ];
+
+      const arcaContents = [
+        { icon: '🤖', label: 'Agentes IA', description: 'Arquitectos especializados por dominio.' },
+        { icon: '📐', label: 'Métodos', description: 'Procesos replicables y conocimiento vivo.' },
+        { icon: '🗺️', label: 'Proyectos', description: 'Ejecución con hitos y trazabilidad.' },
+        { icon: '🤝', label: 'Personas', description: 'Comunidad de guardianes y colaboradores.' },
+        { icon: '🌿', label: 'Territorios', description: 'Municipios, empresas y ecosistemas.' }
+      ];
+
+      const chapters = [
+        {
+          number: 'CAPÍTULO I',
+          title: 'El origen',
+          description: 'Conocimiento aplicado, método replicable y acompañamiento real. El origen de un ecosistema vivo que mejora con cada proyecto.',
+          action: null
+        },
+        {
+          number: 'CAPÍTULO II',
+          title: 'La transformación',
+          description: 'Empresas, territorios y personas que evolucionan. Estrategia, automatización e impacto medible en cada ruta de cambio.',
+          action: { label: 'Ver ecosistema', route: 'soluciones' as PublicRoute }
+        },
+        {
+          number: 'CAPÍTULO III',
+          title: 'Los guardianes del conocimiento',
+          description: 'Director, Consejo de Guardianes y Arquitectos IA. Una jerarquía viva que custodia el rumbo, la memoria y la ejecución del sistema.',
+          action: { label: 'Conocer la jerarquía', route: 'jerarquia-reproorigen' as PublicRoute }
+        },
+        {
+          number: 'CAPÍTULO IV',
+          title: 'Los territorios del futuro',
+          description: 'Bosques, ciudades, forjas, bibliotecas y rutas. Cinco puertas abiertas hacia un universo de legado, aventura y descubrimiento.',
+          action: { label: 'Explorar territorios', route: 'mapa-conocimiento' as PublicRoute }
+        }
+      ];
+
       return (
         <div className="public-home public-home--editorial">
-          <section className="home-hero" aria-label="Hero ReproOrigen XXI">
-            <div className="home-seal" aria-hidden>
-              <span className="home-seal__mark">SELLO</span>
-            </div>
-            <p className="home-hero__lead">Cuando todo se detiene, el futuro encuentra un nuevo origen.</p>
-            <h1>ReproOrigen XXI</h1>
-            <div className="home-hero__actions">
+
+          {/* HERO — ReproOrigen XXI · El Sello del Siglo */}
+          <motion.section
+            className="home-hero home-hero--cinematic home-hero--landscape"
+            aria-label="ReproOrigen XXI — El Sello del Siglo"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.p
+              className="home-hero__seal-label"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
+            >
+              Sello ReproOrigen XXI
+            </motion.p>
+            <motion.div
+              className="home-seal"
+              initial={{ scale: 0.82, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+            >
+              <img src="/sello-reproorigen-oficial.png" alt="Sello oficial de ReproOrigen XXI — El Sello del Siglo" loading="eager" decoding="async" />
+            </motion.div>
+            <motion.p
+              className="home-hero__brand-tag"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.65 }}
+            >
+              REPROORIGEN XXI&nbsp;&nbsp;·&nbsp;&nbsp;El Sello del Siglo
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+            >
+              Cuando todo se detiene,<br />el futuro encuentra<br />un nuevo origen.
+            </motion.h1>
+            <motion.p
+              className="home-hero__lead"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 1.0 }}
+            >
+              Agentes de Inteligencia Artificial que trabajan por tu empresa, conectan a las personas y ayudan a construir un Castellón más próspero, innovador y sostenible.
+            </motion.p>
+            <motion.div
+              className="home-hero__actions"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.2 }}
+            >
               <button type="button" className="public-button public-button--primary" onClick={() => navigate('soluciones')}>
-                Entrar al ecosistema
+                Descubrir ReproOrigen XXI
               </button>
-            </div>
-          </section>
-
-          <section className="home-map" aria-label="Explorar ecosistema">
-            <h2>Explorar</h2>
-            <div className="home-map__grid">
-              <button type="button" className="home-map__node home-map__node--empresas" onClick={() => navigate('soluciones')}>
-                Empresas
+              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('contacto')}>
+                Hablar con un Asesor
               </button>
-              <button type="button" className="home-map__node home-map__node--territorio" onClick={() => navigate('sectores')}>
-                Territorio
-              </button>
-              <button type="button" className="home-map__node home-map__node--experiencias" onClick={() => navigate('albatour')}>
-                Experiencias
-              </button>
-              <button type="button" className="home-map__node home-map__node--comunidad" onClick={() => navigate('comunidad-reproorigen')}>
-                Comunidad
-              </button>
-              <button type="button" className="home-map__node home-map__node--campus" onClick={() => navigate('campus-reproorigen')}>
-                Campus
-              </button>
-            </div>
-          </section>
+            </motion.div>
+            <motion.div
+              className="home-hero__location"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+            >
+              <span>Burriana · Castellón · España</span>
+              <span className="home-hero__est">Est. 2021</span>
+            </motion.div>
+          </motion.section>
 
-          <div className="home-seal home-seal--closing" aria-hidden>
-            <span className="home-seal__mark">Biblioteca Viva Digital</span>
-          </div>
+          {/* SECCIÓN — RE / PRO / ORIGEN / 21 */}
+          <motion.section
+            className="home-acronym"
+            aria-label="El significado de ReproOrigen XXI"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
+          >
+            {[
+              { code: 'RE', meaning: 'renovar · reconstruir' },
+              { code: 'PRO', meaning: 'progreso · profesionalización' },
+              { code: 'ORIGEN', meaning: 'punto de partida' },
+              { code: '21', meaning: 'los retos de nuestro siglo XXI' }
+            ].map((item, index) => (
+              <motion.div
+                key={item.code}
+                className="home-acronym__item"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.45, delay: index * 0.1 }}
+              >
+                <strong className="home-acronym__code">{item.code}</strong>
+                <span className="home-acronym__meaning">{item.meaning}</span>
+              </motion.div>
+            ))}
+          </motion.section>
 
-          <section className="public-panel">
-            <h2>Qué es ReproOrigen XXI</h2>
-            <p>ReproOrigen XXI es una plataforma de transformación empresarial y territorial que integra tecnología, equipos y metodología para convertir retos complejos en hojas de ruta ejecutables.</p>
-            <p>La diferencia entre una web bonita y una institución está en la calidad del conocimiento que comparte: aquí cada sección está pensada para orientar decisiones reales.</p>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Principios de Conocimiento Institucional</h2>
-            <div className="public-grid public-grid--cases">
-              {institutionalKnowledgePillars.map((pillar) => (
-                <article key={pillar.title} className="public-card">
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.description}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Arquitectura del ecosistema</h2>
-            <div className="public-grid public-grid--cases">
-              <article className="public-card public-card--highlight">
-                <h3>Mapa del Conocimiento</h3>
-                <p>Estructura de áreas por competencia demostrable y evolución orgánica del ecosistema.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('mapa-conocimiento')}>
-                  Ver mapa
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Biblioteca Viva</h3>
-                <p>Estructura de colecciones para narrativa, familias, colegios y Campus.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('biblioteca-viva')}>
-                  Ver arquitectura
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Editorial ReproOrigen XXI</h3>
-                <p>Catálogo editorial organizado por colecciones estratégicas.</p>
-                <button type="button" className="public-button public-button--secondary" onClick={() => navigate('editorial-reproorigen')}>
-                  Ver catálogo
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Campus ReproOrigen XXI</h3>
-                <p>Arquitectura de escuelas sin cursos, enfocada en orden institucional.</p>
-                <button type="button" className="public-button" onClick={() => navigate('campus-reproorigen')}>
-                  Ver escuelas
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Catalogo de Arquitectos IA</h3>
-                <p>Mapa de agentes por función, sin desarrollo de lógica ni workflows.</p>
-                <button type="button" className="public-button" onClick={() => navigate('catalogo-agentes-ia')}>
-                  Ver catálogo
-                </button>
-              </article>
-              <article className="public-card public-card--highlight">
-                <h3>Jerarquia ReproOrigen XXI</h3>
-                <p>Director, Guardianes y familias de Arquitectos IA con identidad oficial de marca.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('jerarquia-reproorigen')}>
-                  Ver jerarquia
-                </button>
-              </article>
-              <article className="public-card">
-                <h3>Comunidad y Fundación</h3>
-                <p>Mapa de colaboradores y líneas de acción fundacional.</p>
-                <button type="button" className="public-button" onClick={() => navigate('comunidad-reproorigen')}>
-                  Ver estructura
-                </button>
-              </article>
-              <article className="public-card public-card--highlight">
-                <h3>ALBATOUR</h3>
-                <p>Operador de experiencias y viajes con propósito conectado al ecosistema ReproOrigen XXI.</p>
-                <button type="button" className="public-button public-button--primary" onClick={() => navigate('albatour')}>
-                  Ver ALBATOUR
-                </button>
-              </article>
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Seis pilares del ecosistema</h2>
-            <div className="public-grid public-grid--cases">
-              {ecosystemPillars.map((pillar) => (
-                <article key={pillar.name} className={`public-card ${pillar.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}>
-                  <h3>{pillar.name}</h3>
-                  <p>{pillar.description}</p>
-                  <button type="button" className="public-button" onClick={() => navigate(pillar.route)}>
-                    Ir a {routeLabels[pillar.route]}
-                  </button>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Mapa Oficial ReproOrigen XXI</h2>
-            <p>Estructura pública de navegación institucional y crecimiento por ecosistemas.</p>
-            <div className="public-grid public-grid--cases">
-              {reproOrigenOfficialMap.map((item) => (
-                <article key={item.name} className={`public-card ${item.name === 'ALBATOUR' ? 'public-card--highlight' : ''}`}>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
-                  {item.route ? (
-                    <button type="button" className="public-button" onClick={() => navigate(item.route!)}>
-                      Ir a {routeLabels[item.route]}
-                    </button>
-                  ) : null}
-                  {item.children ? (
-                    <ul className="public-tree-list">
-                      {item.children.map((child) => (
-                        <li key={child}>{child}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="public-panel">
-            <h2>Qué problemas resolvemos</h2>
-            <div className="public-grid">
+          {/* SECCIÓN — Sectores */}
+          <motion.section
+            className="home-sectors"
+            aria-label="Sectores que transformamos"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
+          >
+            <ul className="home-sectors__list">
               {[
-                'Falta de visibilidad comercial y generación de oportunidades.',
-                'Procesos administrativos lentos, repetitivos o desconectados.',
-                'Dificultad para acceder a subvenciones y financiación.',
-                'Necesidad de coordinación entre áreas, partners y territorio.'
-              ].map((item) => (
-                <article key={item} className="public-card">
-                  <p>{item}</p>
-                </article>
+                'Reformas',
+                'Ventanas',
+                'Energía solar',
+                'Administradores de fincas',
+                'Gestorías',
+                'Autónomos y PYMES',
+                'Sector cerámico',
+                'Cooperativas agrícolas'
+              ].map((sector) => (
+                <li key={sector}>{sector}</li>
+              ))}
+            </ul>
+          </motion.section>
+
+          {/* SECCIÓN — El mapa vivo */}
+          <motion.section
+            className="home-map home-map--cinematic home-map--territories"
+            aria-label="El mapa vivo — cinco territorios"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75 }}
+          >
+            <p className="home-hero__eyebrow">ESCENA II · EL MAPA VIVO</p>
+            <h2>El mapa extendido sobre la mesa</h2>
+            <p>Mapas antiguos, rutas dibujadas a mano y una sensación de misión: cada territorio guarda historia y espera ser descubierto.</p>
+            <div className="home-territories__grid">
+              {arcaTerritorios.map((territorio, index) => (
+                <motion.button
+                  key={territorio.name}
+                  type="button"
+                  className={`home-territory__card ${territorio.className}`}
+                  onClick={() => navigate(territorio.route)}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <span className="home-territory__emoji" aria-hidden="true">{territorio.emoji}</span>
+                  <span className="home-territory__name">{territorio.name}</span>
+                  <span className="home-territory__subtitle">{territorio.subtitle}</span>
+                  <span className="home-territory__desc">{territorio.description}</span>
+                </motion.button>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="public-panel">
-            <h2>Modelo de activacion de Arquitectos IA</h2>
-            <p>Activamos arquitectos IA especializados por área para que cada organización pueda operar con más capacidad sin aumentar estructura fija: contratación flexible, objetivos claros y seguimiento por resultados.</p>
-          </section>
+          {/* ESCENA 3 — El Arca */}
+          <PhotoBanner
+            variant="archive"
+            title="El Arca — Biblioteca Secreta del Origen"
+            eyebrow="ESCENA CINEMATOGRÁFICA · ARCHIVO SECRETO"
+            caption="Biblioteca secreta, madera antigua, pergaminos, cartografía y solemnidad arquitectónica. Debe sentirse como un fotograma, no como una foto de stock."
+          />
 
-          <section className="public-panel public-panel--stack">
-            <h2>Nuestra visión</h2>
-            <p>ReproOrigen XXI integra tecnología, inteligencia artificial, personas, territorio y comunidad para construir crecimiento con sentido.</p>
-            <div className="public-grid">
-              {['Tecnología', 'Inteligencia Artificial', 'Personas', 'Territorio', 'Comunidad'].map((item) => (
-                <article key={item} className="public-card">
-                  <h3>{item}</h3>
-                </article>
+          <motion.section
+            className="public-panel public-panel--stack home-chapter home-arca"
+            aria-label="El Arca — interior del ecosistema"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="public-kicker">ESCENA III · EL ARCA</p>
+            <h2>Dentro del Arca</h2>
+            <p className="home-arca__intro">Un archivo vivo. Una biblioteca secreta de piedra y madera que guarda mapas, reliquias, métodos, agentes IA e historias humanas. Aquí el conocimiento escondido espera ser encontrado.</p>
+            <div className="home-arca__contents">
+              {arcaContents.map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  className="home-arca__item"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.45, delay: index * 0.09 }}
+                >
+                  <span className="home-arca__icon" aria-hidden="true">{item.icon}</span>
+                  <strong className="home-arca__label">{item.label}</strong>
+                  <span className="home-arca__desc">{item.description}</span>
+                </motion.div>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="public-panel public-panel--stack">
-            <h2>Cómo trabajamos</h2>
-            <div className="public-grid public-grid--workflow">
-              {workFlow.map((step) => (
-                <article key={step} className="public-card">
-                  <h3>{step}</h3>
-                </article>
+          {/* ESCENA 4 — Los Capítulos */}
+          <PhotoBanner
+            variant="journey"
+            title="Una saga de descubrimiento, exploración y legado"
+            eyebrow="ESCENA CINEMATOGRÁFICA · TERRITORIO DE MISIÓN"
+            caption="ReproOrigen XXI no debe parecer una web bonita: debe sentirse como un viaje hacia un territorio que tiene historia."
+          />
+
+          <motion.section
+            className="public-panel public-panel--stack home-chapter"
+            aria-label="Los Capítulos"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="public-kicker">ESCENA IV · LOS CAPÍTULOS</p>
+            <h2>La historia en cuatro capítulos</h2>
+            <div className="public-grid public-grid--cases home-grid-reduced home-chapters__grid">
+              {chapters.map((chapter, index) => (
+                <motion.article
+                  key={chapter.number}
+                  className="public-card home-chapter__card"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.5, delay: index * 0.09 }}
+                >
+                  <p className="home-chapter__number">{chapter.number}</p>
+                  <h3>{chapter.title}</h3>
+                  <p>{chapter.description}</p>
+                  {chapter.action && (
+                    <button type="button" className="public-button" onClick={() => navigate(chapter.action!.route)}>
+                      {chapter.action.label}
+                    </button>
+                  )}
+                </motion.article>
               ))}
             </div>
-          </section>
+          </motion.section>
 
-          <section className="public-panel public-panel--stack">
-            <h2>Casos de uso</h2>
-            <div className="public-grid public-grid--cases">
-              {useCases.map((item) => (
-                <article key={item.title} className="public-card">
-                  <h3>{item.title}</h3>
-                  <p><strong>Problema:</strong> {item.problem}</p>
-                  <p><strong>Solución ReproOrigen XXI:</strong> {item.solution}</p>
-                </article>
-              ))}
+          {/* MANIFIESTO */}
+          <motion.section
+            className="home-manifesto"
+            aria-label="Manifiesto ReproOrigen XXI"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <blockquote className="home-manifesto__quote">
+              "Nuestro planeta es el lugar más maravilloso del universo conocido. Cada árbol que protegemos, cada pueblo que recuperamos y cada persona a la que ayudamos es una coordenada más en el mapa de la Tierra Prometida."
+            </blockquote>
+            <div className="home-manifesto__body">
+              <p>ReproOrigen XXI no busca un mundo mejor.</p>
+              <p className="home-manifesto__emphasis">Lo construye.</p>
+              <p>Pueblo a pueblo.</p>
+              <p>Árbol a árbol.</p>
+              <p>Persona a persona.</p>
+              <p>Porque la Tierra Prometida comienza allí donde alguien decide cuidar lo que ama.</p>
             </div>
-          </section>
-
-          <section className="public-panel public-panel--stack">
-            <h2>Sectores y ecosistemas</h2>
-            <div className="public-grid">
-              {ecosystems.map((item) => (
-                <article key={item} className="public-card">
-                  <h3>{item}</h3>
-                </article>
-              ))}
+            <div className="home-manifesto__seal" aria-hidden="true">
+              <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" />
+              <span>ReproOrigen XXI</span>
+              <span className="home-manifesto__seal-sub">El Sello del Siglo</span>
+              <p className="home-manifesto__seal-quote">"Cuando todo se detiene, algo nuevo puede empezar."</p>
             </div>
-          </section>
-
-          <section className="public-panel">
-            <h2>Fundación ReproOrigen XXI</h2>
-            <p>Integramos impacto ambiental, educación y comunidad para generar transformación social sostenible en paralelo al crecimiento empresarial.</p>
-          </section>
+          </motion.section>
 
           <FinalCta onNavigate={navigate} />
         </div>
@@ -3871,7 +4009,7 @@ function PublicPage() {
           <section className="public-hero editorial-hero">
             <p className="public-kicker">Biblioteca Viva ReproOrigen XXI</p>
             <h1>Biblioteca Viva ReproOrigen XXI</h1>
-            <p>Libros que ayudan a reflexionar y crecer, con lenguaje visual editorial inspirado en pergamino, luz y naturaleza.</p>
+            <p>Una institución editorial del futuro con raíces antiguas: pergamino, piedra, madera, luz de vela y escenas que parecen fotogramas de una película.</p>
           </section>
 
           <div className="public-panel public-panel--stack editorial-panel">
@@ -4405,25 +4543,53 @@ function PublicPage() {
 
     if (currentRoute === 'contacto') {
       return (
-        <section className="public-contact">
-          <div className="public-contact__copy">
-            <h1>Contacto</h1>
-            <p>Cuéntanos qué necesitas y preparamos una propuesta inicial para tu organización.</p>
-            <p>Este formulario no guarda datos todavía y queda listo para conectar al CRM en la siguiente misión.</p>
-            <div className="public-hero__actions">
-              <button type="button" className="public-button public-button--primary" onClick={() => navigate('solicitar-diagnostico')}>
-                Solicitar diagnóstico
-              </button>
-              <button type="button" className="public-button public-button--secondary" onClick={() => navigate('reservar-reunion')}>
-                Reservar reunión
-              </button>
-            </div>
+        <section className="public-contact public-contact--hablemos">
+          <div className="public-contact__header">
+            <p className="public-kicker">Contacto</p>
+            <h1>Hablemos.</h1>
+            <p className="public-contact__headline">El futuro se construye conversando.<br />Empieza hoy el cambio que quieres ver mañana.</p>
+            <p>
+              Tanto si diriges una empresa que desea incorporar Agentes de Inteligencia Artificial, como si representas a un ayuntamiento, una asociación o simplemente quieres formar parte de la comunidad ReproOrigen XXI, estaremos encantados de escucharte.
+            </p>
+            <p>
+              Analizamos cada proyecto de forma personalizada para encontrar soluciones reales, optimizar recursos, ahorrar tiempo y descubrir oportunidades de financiación, subvenciones y colaboración.
+            </p>
+            <p className="public-contact__personal-note">La primera conversación siempre comienza escuchando.</p>
           </div>
+
+          <div className="public-contact__info-grid">
+            <a className="public-contact__info-card" href={`tel:${publicConfig.phone.replace(/\s/g, '')}`}>
+              <span className="public-contact__info-label">Teléfono</span>
+              <strong>{publicConfig.phone}</strong>
+            </a>
+            <a className="public-contact__info-card" href={`mailto:${publicConfig.corporateEmail}`}>
+              <span className="public-contact__info-label">Correo electrónico</span>
+              <strong>{publicConfig.corporateEmail}</strong>
+            </a>
+            <div className="public-contact__info-card">
+              <span className="public-contact__info-label">Ubicación</span>
+              <strong>{publicConfig.address}</strong>
+            </div>
+            <a
+              className="public-contact__info-card public-contact__info-card--whatsapp"
+              href={`https://wa.me/${publicConfig.phone.replace(/[^0-9]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="public-contact__info-label">Mensaje por WhatsApp</span>
+              <strong>Escribir ahora →</strong>
+            </a>
+          </div>
+
+          <div className="public-contact__guarantee">
+            <p><strong>Garantía</strong></p>
+            <p>Respondemos personalmente en menos de 24 horas laborables.</p>
+            <p>Cada consulta recibe un estudio inicial para orientarte sobre las mejores opciones antes de tomar cualquier decisión.</p>
+          </div>
+
           <div className="public-contact__forms">
             <PublicContactForm />
-            <MeetingReservationCard />
           </div>
-          <FinalCta onNavigate={navigate} />
         </section>
       );
     }
@@ -4516,18 +4682,19 @@ function PublicPage() {
       ) : (
         <>
       <header className="public-header">
-        <div>
-          <strong>{publicConfig.companyName}</strong>
-          <p>{publicConfig.slogan}</p>
-        </div>
-        {currentRoute !== 'inicio' ? (
-          <>
-            <button type="button" className="public-header__menu" onClick={() => setNavOpen((prev) => !prev)} aria-expanded={navOpen} aria-label="Abrir navegación">
-              Menú
-            </button>
-            <PublicTopNav currentRoute={currentRoute} isOpen={navOpen} onNavigate={navigate} />
-          </>
-        ) : null}
+        <button type="button" className="public-header__brand" onClick={() => navigate('inicio')}>
+          <span className="public-header__seal" aria-hidden>
+            <img src="/sello-reproorigen-oficial.png" alt="" loading="lazy" decoding="async" />
+          </span>
+          <span className="public-header__brand-copy">
+            <strong>{publicConfig.companyName}</strong>
+            <p>{publicConfig.slogan}</p>
+          </span>
+        </button>
+        <button type="button" className="public-header__menu" onClick={() => setNavOpen((prev) => !prev)} aria-expanded={navOpen} aria-label="Abrir navegación">
+          Menú
+        </button>
+        <PublicTopNav currentRoute={currentRoute} isOpen={navOpen} onNavigate={navigate} />
       </header>
       <main>{renderPage()}</main>
       <PublicFooter onNavigate={navigate} />

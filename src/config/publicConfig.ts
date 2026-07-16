@@ -26,11 +26,11 @@ export type PublicConfig = {
 export const publicConfig: PublicConfig = {
   companyName: 'ReproOrigen XXI',
   domain: 'https://reproorigen21.com',
-  corporateEmail: 'contacto@reproorigen21.com',
-  phone: '+34 960 000 000',
-  address: 'Comunidad Valenciana, Espana',
+  corporateEmail: 'rebeca@reproorigen21.com',
+  phone: '+34 633 03 41 37',
+  address: 'Burriana · Castellón · España',
   logo: '/favicon.svg',
-  slogan: 'El Origen que Despierta.',
+  slogan: 'El Sello del Siglo',
   social: {
     linkedin: 'https://www.linkedin.com/company/reproorigenxxi',
     instagram: 'https://www.instagram.com/reproorigenxxi',
